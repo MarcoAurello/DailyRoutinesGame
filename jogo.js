@@ -11,7 +11,8 @@
   const horaTexto = (h) => String(h).padStart(2, '0') + ':00';
 
   // ---------- Regras (planejamento, seções 5 e 6) ----------
-  const DURACAO = 100;              // segundos por partida
+  const DURACAO = 200;              // segundos por partida (o dobro do planejamento, a pedido do professor)
+  const LEMBRETE = 8;               // segundos numa hora sem abrir a agenda até o lembrete
   const PONTOS_INICIAIS = 1000;
   const PENALIDADE = 100;           // por erro ou hora sem resposta
   // bônus por acerto: até 5 s vale 100; depois perde 10 por segundo; 15 s ou mais vale 0
@@ -75,6 +76,7 @@
   const FALAS = {
     acerto: ['Great job! Mandou bem!', 'Excellent! Isso aí!', 'Well done! Perfeito!'],
     erro: ['Oops! Não foi dessa vez, keep going!', "Don't worry! Vamos para a próxima!", 'Almost! Continue tentando!'],
+    lembrete: 'Psiu! As atividades estão na agenda. Open the agenda!',
   };
 
   function tocarGravacao(nome) {
@@ -234,14 +236,14 @@
     const idiomaAgenda = modo === 'pt-en' ? 'em português' : 'em inglês';
     const idiomaFrases = modo === 'pt-en' ? 'em inglês' : 'em português';
     return {
-      html: `<b>Hello, ${seguro(aluno)}!</b> Hoje você vai acompanhar o dia da <b>${seguro(n)}</b>, das <b>9h às 18h</b>.<br>
-        ⏰ Use as setas <b>◀ ▶</b> do relógio para escolher a hora, em qualquer ordem.<br>
-        📒 Abra a <b>Agenda</b> (${idiomaAgenda}) para ver o que ela faz em cada hora.<br>
+      html: `<b>Hello, ${seguro(aluno)}!</b> Acompanhe o dia da <b>${seguro(n)}</b>, das <b>9h às 18h</b>.<br>
+        ⏰ Escolha a hora no relógio <b>◀ ▶</b>.<br>
+        📒 Veja na <b>Agenda</b> (${idiomaAgenda}) o que ela faz.<br>
         ✅ Escolha a frase certa ${idiomaFrases}. Errou? A hora fica bloqueada!<br>
-        ⏱ Você tem <b>${DURACAO} segundos</b>. Be fast and read carefully! <b>Good luck!</b>`,
-      falado: `Hello, ${aluno}! Hoje você vai acompanhar o dia da ${n}, das nove da manhã às seis da tarde. `
-        + `Use as setas do relógio para escolher a hora, em qualquer ordem. Abra a agenda, ${idiomaAgenda}, para ver o que ela faz em cada hora, `
-        + `e escolha a frase certa ${idiomaFrases}. Se errar, a hora fica bloqueada. Você tem ${DURACAO} segundos. Be fast and read carefully! Good luck!`,
+        ⏱ Você tem <b>${DURACAO} segundos</b>. <b>Good luck!</b>`,
+      // áudio curto: o texto completo fica na tela
+      falado: `Hello, ${aluno}! Escolha a hora no relógio, veja na agenda o que a ${n} faz e escolha a frase certa. `
+        + `Você tem ${DURACAO} segundos. Good luck!`,
     };
   }
   function telaExplicacao() {
@@ -261,6 +263,8 @@
   // horas: { hora, ativ (versão do nível), opcoes, estado: pendente|certo|errado, escolha, bonus, tempo }
   let horas = [], atual = 0, inicio = 0, inicioHora = 0, relogioTimer = null, encerrada = true, proximaTimer = null;
   let ultimoSegundo = null;
+  // agenda: se o aluno fica numa hora sem abrir a agenda, o jogo lembra que as atividades estão nela
+  let agendaJaAberta = false, agendaNaHora = false, lembreteTimer = null, lembretesFalados = 0;
 
   function comecar() {
     horas = personagem.rotina.map((r) => {
@@ -272,6 +276,7 @@
       };
     });
     encerrada = false;
+    agendaJaAberta = false; lembretesFalados = 0;
     inicio = Date.now();
     ultimoSegundo = null;
     mostrar('tela-jogo');
@@ -299,7 +304,34 @@
     clearTimeout(proximaTimer);
     atual = (i + horas.length) % horas.length;
     inicioHora = Date.now();   // trocar de hora reinicia o cronômetro de bônus daquela hora
+    agendaNaHora = false;
     desenharHora();
+    agendarLembrete();
+  }
+
+  function marcarAgenda(classe) {
+    for (const id of ['btn-agenda', 'btn-agenda-grande']) {
+      $(id).classList.toggle('chamar', classe === 'chamar');
+      $(id).classList.toggle('lembrar', classe === 'lembrar');
+    }
+  }
+
+  function agendarLembrete() {
+    clearTimeout(lembreteTimer);
+    const h = horas[atual];
+    marcarAgenda(!agendaJaAberta && h.estado === 'pendente' ? 'chamar' : null);
+    if (h.estado !== 'pendente') return;
+    const hora = atual;
+    lembreteTimer = setTimeout(() => {
+      if (encerrada || hora !== atual || agendaNaHora || horas[hora].estado !== 'pendente' || !$('modal-agenda').hidden) return;
+      marcarAgenda('lembrar');
+      sprite('sprite-jogo', 'ideia');
+      balao(origem() === 'pt'
+        ? '💡 <b>Psiu!</b> As atividades estão na <b>📒 Agenda</b>! Abra para ver o que ela faz às ' + horaTexto(horas[hora].hora) + '.'
+        : '💡 <b>Psst!</b> The activities are in the <b>📒 Agenda</b>! Open it to see what she does at ' + horaTexto(horas[hora].hora) + '.', 'lembrete');
+      // a voz só nas duas primeiras vezes, para não cansar
+      if (lembretesFalados < 2) { lembretesFalados++; professor('lembrete-agenda', FALAS.lembrete); }
+    }, LEMBRETE * 1000);
   }
 
   function desenharHoras() {
@@ -360,6 +392,8 @@
   function responder(op, botao) {
     const h = horas[atual];
     if (encerrada || h.estado !== 'pendente') return;
+    clearTimeout(lembreteTimer);
+    marcarAgenda(null);
     h.escolha = op;
     h.tempo = (Date.now() - inicioHora) / 1000;
     document.querySelectorAll('#opcoes .opcao').forEach((b) => { b.disabled = true; });
@@ -401,6 +435,10 @@
   // ---------- Agenda (popup no idioma de origem) ----------
   function abrirAgenda() {
     SOM.clique();
+    agendaJaAberta = true; agendaNaHora = true;
+    clearTimeout(lembreteTimer);
+    marcarAgenda(null);
+    if ($('balao-jogo').classList.contains('lembrete')) desenharHora();
     const o = origem();
     const feito = o === 'pt' ? 'feito' : 'done';
     $('agenda-titulo').textContent = `📒 ${o === 'pt' ? 'Agenda da' : 'Agenda:'} ${personagem.nome}`;
@@ -415,6 +453,7 @@
   }
   function fecharAgenda() { $('modal-agenda').hidden = true; $('btn-agenda').focus({ preventScroll: true }); }
   $('btn-agenda').onclick = abrirAgenda;
+  $('btn-agenda-grande').onclick = abrirAgenda;
   $('fechar-agenda').onclick = fecharAgenda;
   $('modal-agenda').onclick = (e) => { if (e.target === $('modal-agenda')) fecharAgenda(); };
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('modal-agenda').hidden) fecharAgenda(); });
@@ -427,6 +466,7 @@
     encerrada = true;
     clearInterval(relogioTimer);
     clearTimeout(proximaTimer);
+    clearTimeout(lembreteTimer);
     $('modal-agenda').hidden = true;
     const tempo = Math.min(DURACAO, Math.round(decorrido()));
     const acertos = horas.filter((h) => h.estado === 'certo').length;

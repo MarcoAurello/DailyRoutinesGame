@@ -14,14 +14,17 @@ Funciona no celular, no tablet e no computador, e pode ser instalado como app (P
 3. **Nível**: fácil (frases curtas) ou difícil (frases completas, erradas quase iguais à certa).
 4. **Personagem**: por enquanto só a **Dona Joana**; os outros 4 aparecem como "em breve".
 5. **Explicação** do professor (gravação ou voz do aparelho).
-6. **Jogo**: 100 segundos, relógio digital com ◀ ▶, indicador das 10 horas, botão **Agenda**
+6. **Jogo**: 200 segundos (o dobro do planejamento), relógio digital com ◀ ▶, indicador das 10 horas, botão **Agenda**
    (rotina no idioma de origem) e 4 alternativas no idioma de destino.
 7. **Fim**: pontuação, tempo, acertos, erros, correção hora a hora e **PDF** para baixar.
 
 ## Regras (planejamento, seções 5 e 6)
 
 - Acertou: ✓ na agenda e no relógio. Errou: a hora fica bloqueada (a resposta certa só aparece no fim).
-- O dia acaba quando as 10 horas são respondidas ou os 100 segundos acabam; horas sem resposta contam como erro.
+- O dia acaba quando as 10 horas são respondidas ou os 200 segundos acabam; horas sem resposta contam como erro.
+- Agenda em destaque (botão no topo e botão grande acima da pergunta, brilhando até a primeira abertura).
+  Se o aluno fica 8 s numa hora sem abrir a agenda, o jogo lembra que as atividades estão nela
+  (a voz do lembrete toca só nas duas primeiras vezes da partida).
 - Pontuação oculta durante o jogo: começa com 1000, −100 por erro, + bônus de velocidade por acerto
   (até 5 s = +100, depois −10 por segundo, 15 s ou mais = 0). Trocar de hora reinicia o bônus daquela hora.
 - O PDF tem o desempenho (Parte 1) e a rotina em português e inglês lado a lado (Parte 2).

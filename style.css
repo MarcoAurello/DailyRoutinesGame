@@ -268,6 +268,32 @@ button.personagem:hover { transform: translateY(-4px) rotate(-1deg); }
   border-radius: 999px; box-shadow: 0 6px 0 var(--ouro-escuro);
 }
 .btn-agenda:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--ouro-escuro); }
+.btn-agenda { padding: 13px 24px; font-size: 21px; border: 3px solid var(--branco); }
+
+/* botão grande da agenda, logo acima da pergunta */
+.btn-agenda-grande {
+  display: block; width: 100%; margin-bottom: 14px; padding: 14px 16px;
+  font-size: clamp(19px, 2.6vw, 23px); font-weight: 700;
+  color: var(--azul-escuro); background: linear-gradient(180deg, #f6cd73, var(--ouro));
+  border: 3px solid var(--ouro-escuro); border-radius: 18px;
+  box-shadow: 0 6px 0 var(--ouro-escuro);
+}
+.btn-agenda-grande i { font-weight: 600; }
+.btn-agenda-grande:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--ouro-escuro); }
+
+/* enquanto o aluno ainda não abriu a agenda: brilho chamando */
+.chamar { animation: chamar 1.6s ease-in-out infinite; }
+@keyframes chamar { 50% { box-shadow: 0 6px 0 var(--ouro-escuro), 0 0 0 7px rgba(232, 176, 74, 0.45); } }
+/* lembrete: balança forte */
+.lembrar { animation: lembrar 0.9s ease-in-out infinite; }
+@keyframes lembrar {
+  0%, 100% { transform: rotate(0); box-shadow: 0 6px 0 var(--ouro-escuro), 0 0 0 9px rgba(224, 64, 77, 0.55); }
+  20% { transform: rotate(-3deg) scale(1.04); }
+  40% { transform: rotate(3deg) scale(1.04); }
+  60% { transform: rotate(-2deg); }
+}
+.balao.lembrete { border-color: var(--ouro); background: #fff8e6; }
+.balao-cima.lembrete::before { border-bottom-color: var(--ouro); }
 
 /* relógio digital */
 .relogio { display: flex; align-items: center; justify-content: center; gap: 12px; }
@@ -409,6 +435,7 @@ tr.errado .c-sit, tr.pendente .c-sit { color: var(--vermelho); }
   }
   .cena-jogo .balao-cima.certo::before { border-bottom-color: transparent; border-right-color: var(--verde); }
   .cena-jogo .balao-cima.errado::before { border-bottom-color: transparent; border-right-color: var(--vermelho); }
+  .cena-jogo .balao-cima.lembrete::before { border-bottom-color: transparent; border-right-color: var(--ouro); }
   .horas { grid-template-columns: repeat(5, 1fr); }
   .seta { width: 48px; height: 48px; }
   .visor { min-width: 0; flex: 1; max-width: 220px; }
@@ -423,5 +450,5 @@ tr.errado .c-sit, tr.pendente .c-sit { color: var(--vermelho); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .enfeite, .cronometro.alerta .cronometro-num, .confete span { animation: none !important; }
+  .enfeite, .cronometro.alerta .cronometro-num, .confete span, .chamar, .lembrar { animation: none !important; }
 }

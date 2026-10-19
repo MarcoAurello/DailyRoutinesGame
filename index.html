@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
   <!-- moldura de estrelas, relógios e balões -->
@@ -136,6 +136,7 @@
           <div class="balao balao-cima" id="balao-jogo"></div>
         </div>
         <div class="cartao cartao-pergunta">
+          <button class="btn-agenda-grande" id="btn-agenda-grande" type="button">📒 Abrir a agenda · <i>Open the agenda</i></button>
           <p class="enunciado" id="enunciado"></p>
           <div class="opcoes" id="opcoes"></div>
           <p class="situacao" id="situacao" hidden></p>
@@ -199,8 +200,8 @@
   </footer>
 
   <script src="vendor/jspdf.umd.min.js"></script>
-  <script src="dados.js?v=1"></script>
-  <script src="jogo.js?v=1"></script>
+  <script src="dados.js?v=2"></script>
+  <script src="jogo.js?v=2"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));
