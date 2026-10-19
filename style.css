@@ -246,6 +246,15 @@ button.personagem:hover { transform: translateY(-4px) rotate(-1deg); }
 
 /* ---------- Jogo ---------- */
 .barra-jogo { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.btn-sair {
+  flex-shrink: 0; padding: 12px 16px; font-size: 18px; font-weight: 700;
+  color: var(--vermelho); background: var(--branco);
+  border-radius: 999px; box-shadow: var(--sombra);
+}
+.btn-sair:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(10, 14, 45, 0.35); }
+.modal-sair { padding: 22px 20px 20px; text-align: center; }
+.modal-sair h3 { font-family: 'Fredoka', sans-serif; font-size: 26px; color: var(--azul); margin-bottom: 8px; }
+.modal-sair p { font-size: 17px; font-weight: 700; color: var(--cinza); }
 
 .cronometro {
   flex: 1; display: flex; align-items: center; gap: 10px;
@@ -443,6 +452,10 @@ tr.errado .c-sit, tr.pendente .c-sit { color: var(--vermelho); }
   .cena:not(.cena-jogo) { flex-direction: column; }
   .balao-esq::before { display: none; }
   .btn-agenda { padding: 10px 14px; font-size: 17px; }
+  .barra-jogo { gap: 8px; }
+  .btn-sair { padding: 10px 13px; }
+  .btn-sair span { display: none; }   /* no celular fica só o ✕ */
+  .cronometro { padding: 8px 10px; gap: 6px; }
   .enfeite { opacity: 0.35; }
   /* durante a partida o logo fica menor para sobrar espaço para as frases */
   body.jogando .logo { height: 44px; }

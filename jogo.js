@@ -264,6 +264,7 @@
   let horas = [], atual = 0, inicio = 0, inicioHora = 0, relogioTimer = null, encerrada = true, proximaTimer = null;
   let ultimoSegundo = null;
   // agenda: se o aluno fica numa hora sem abrir a agenda, o jogo lembra que as atividades estão nela
+  let pausaInicio = 0;   // quando o aluno pede para sair, o tempo fica parado até ele decidir
   let agendaJaAberta = false, agendaNaHora = false, lembreteTimer = null, lembretesFalados = 0;
 
   function comecar() {
@@ -289,7 +290,7 @@
   const decorrido = () => (Date.now() - inicio) / 1000;
 
   function atualizarCronometro() {
-    if (encerrada) return;
+    if (encerrada || pausaInicio) return;
     const resta = Math.max(0, DURACAO - decorrido());
     const seg = Math.ceil(resta);
     $('cronometro-num').textContent = seg;
@@ -427,7 +428,7 @@
     SOM.clique(); selecionarHora(Number(b.dataset.i));
   };
   document.addEventListener('keydown', (e) => {
-    if (!$('tela-jogo').classList.contains('ativa') || !$('modal-agenda').hidden) return;
+    if (!$('tela-jogo').classList.contains('ativa') || !$('modal-agenda').hidden || !$('modal-sair').hidden) return;
     if (e.key === 'ArrowLeft') selecionarHora(atual - 1);
     if (e.key === 'ArrowRight') selecionarHora(atual + 1);
   });
@@ -458,6 +459,42 @@
   $('modal-agenda').onclick = (e) => { if (e.target === $('modal-agenda')) fecharAgenda(); };
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('modal-agenda').hidden) fecharAgenda(); });
 
+  // ---------- Sair da partida ----------
+  function pedirSair() {
+    if (encerrada) return;
+    SOM.clique();
+    pausaInicio = Date.now();
+    clearTimeout(lembreteTimer);
+    $('modal-agenda').hidden = true;
+    $('modal-sair').hidden = false;
+    $('sair-continuar').focus();
+  }
+  function continuar() {
+    if (!pausaInicio) return;
+    // o tempo parado não conta nem para a partida nem para o bônus da hora
+    const parado = Date.now() - pausaInicio;
+    inicio += parado; inicioHora += parado;
+    pausaInicio = 0;
+    $('modal-sair').hidden = true;
+    if (!agendaNaHora) agendarLembrete();
+    $('btn-sair').focus({ preventScroll: true });
+  }
+  function sair() {
+    encerrada = true;
+    pausaInicio = 0;
+    clearInterval(relogioTimer);
+    clearTimeout(proximaTimer);
+    clearTimeout(lembreteTimer);
+    pararVoz();
+    $('modal-sair').hidden = true;
+    mostrar('tela-modo');
+  }
+  $('btn-sair').onclick = pedirSair;
+  $('sair-continuar').onclick = continuar;
+  $('sair-confirmar').onclick = () => { SOM.clique(); sair(); };
+  $('modal-sair').onclick = (e) => { if (e.target === $('modal-sair')) continuar(); };
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('modal-sair').hidden) continuar(); });
+
   // ---------- 7. Fim ----------
   let resultado = null;
 
@@ -468,6 +505,8 @@
     clearTimeout(proximaTimer);
     clearTimeout(lembreteTimer);
     $('modal-agenda').hidden = true;
+    $('modal-sair').hidden = true;
+    pausaInicio = 0;
     const tempo = Math.min(DURACAO, Math.round(decorrido()));
     const acertos = horas.filter((h) => h.estado === 'certo').length;
     const erros = horas.length - acertos;   // erradas + sem resposta

@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <!-- moldura de estrelas, relógios e balões -->
@@ -116,6 +116,7 @@
     <!-- 6. Jogo -->
     <section class="tela" id="tela-jogo">
       <div class="barra-jogo">
+        <button class="btn-sair" id="btn-sair" type="button" aria-label="Sair do jogo">✕ <span>Sair</span></button>
         <div class="cronometro" id="cronometro" role="timer" aria-live="off">
           <span class="cronometro-num" id="cronometro-num">100</span>
           <span class="cronometro-barra"><b id="cronometro-barra"></b></span>
@@ -195,13 +196,25 @@
     </div>
   </div>
 
+  <!-- Confirmação para sair da partida -->
+  <div class="fundo-modal" id="modal-sair" hidden>
+    <div class="modal modal-sair" role="alertdialog" aria-modal="true" aria-labelledby="sair-titulo" aria-describedby="sair-texto">
+      <h3 id="sair-titulo">Sair do jogo? · <i>Quit?</i></h3>
+      <p id="sair-texto">O tempo fica parado. Se sair, esta partida não será salva.</p>
+      <div class="linha-botoes">
+        <button class="btn-sec" id="sair-continuar" type="button">▶ Continuar jogando</button>
+        <button class="btn-grande" id="sair-confirmar" type="button">Sair</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="credito">
     <span>© <b>Marco Nunes</b> — Todos os direitos reservados</span>
   </footer>
 
   <script src="vendor/jspdf.umd.min.js"></script>
-  <script src="dados.js?v=2"></script>
-  <script src="jogo.js?v=2"></script>
+  <script src="dados.js?v=3"></script>
+  <script src="jogo.js?v=3"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));
