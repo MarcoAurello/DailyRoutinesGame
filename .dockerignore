@@ -1,0 +1,14 @@
+# só os arquivos do jogo entram no servidor; originais e ferramentas ficam de fora
+.git
+.gitignore
+Dockerfile
+.dockerignore
+README.md
+GRAVAR.md
+My_Day_planejamento.pdf
+marca.jpg
+ferramentas
+joana
+policialjack
+influenciadora emily
+**/__pycache__

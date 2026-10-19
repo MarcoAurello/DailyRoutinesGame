@@ -51,6 +51,12 @@ Funciona no celular, no tablet e no computador, e pode ser instalado como app (P
 - `ferramentas/sprites.py` — recorta as imagens de sprites (fundo branco ou cinza) e monta a folha de cada personagem
 - `ferramentas/marca.py` — tira o fundo da marca, gera os ícones e a capa
 
+## Publicar na VPS (Dokploy)
+
+O `Dockerfile` monta um nginx que serve o jogo em `/myday/` (o `.dockerignore` deixa de fora originais e ferramentas).
+No Dokploy: aplicação ligada a este repositório, Build Type **Dockerfile**, domínio com path `/myday`,
+**Strip Path desligado**, porta **80** e HTTPS (Let's Encrypt).
+
 ## Para adicionar um personagem
 
 1. Coloque a imagem de sprites e a capa em uma pasta própria e ajuste/rode as ferramentas.
