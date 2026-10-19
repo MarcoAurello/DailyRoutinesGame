@@ -30,6 +30,15 @@ Funciona no celular, no tablet e no computador, e pode ser instalado como app (P
 - O PDF tem o desempenho (Parte 1) e a rotina em português e inglês lado a lado (Parte 2).
   A tradução das alternativas erradas está ligada por `PDF_COM_ERRADAS` no `jogo.js` (pendente de confirmação).
 
+## Android e iPhone
+
+- Som: o jogo destrava o áudio no primeiro toque e usa um único player para as gravações,
+  porque o iPhone bloqueia sons que não começam com um toque. Quais gravações existem é verificado ao abrir o jogo.
+- PDF: no iPhone/iPad abre o menu de compartilhar (Salvar em Arquivos, WhatsApp...); no Android baixa direto.
+- Se o aluno troca de app, recebe ligação ou bloqueia a tela no meio da partida, o tempo pausa.
+- Sem zoom de dois toques, sem "puxar para recarregar" no Android e respeito ao entalhe (notch) da tela.
+- No iPhone, o modo silencioso (chave lateral) também silencia os efeitos sonoros do jogo.
+
 ## Arquivos
 
 - `index.html`, `style.css` — telas e visual (cores da English Academy)

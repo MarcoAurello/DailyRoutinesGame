@@ -19,20 +19,34 @@
 
 html, body { min-height: 100%; }
 
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--azul); }   /* body sem fundo: o fundo fica na camada fixa abaixo */
+
 body {
   font-family: 'Nunito', system-ui, sans-serif;
   color: var(--texto);
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;   /* no Android, puxar a tela para baixo não recarrega o jogo no meio da partida */
+}
+
+/* fundo fixo numa camada própria (o iPhone ignora background-attachment: fixed) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background:
     radial-gradient(circle at 15% 8%, rgba(255, 255, 255, 0.14), transparent 40%),
     radial-gradient(circle at 90% 95%, rgba(200, 32, 47, 0.35), transparent 45%),
     linear-gradient(160deg, var(--azul-medio) 0%, var(--azul) 55%, var(--azul-escuro) 100%);
-  background-color: var(--azul);
-  background-attachment: fixed;
-  -webkit-tap-highlight-color: transparent;
-  overflow-x: hidden;
 }
 
-button { font-family: 'Fredoka', 'Nunito', sans-serif; cursor: pointer; border: none; color: inherit; }
+button {
+  font-family: 'Fredoka', 'Nunito', sans-serif; cursor: pointer; border: none; color: inherit;
+  touch-action: manipulation;          /* sem atraso nem zoom de dois toques */
+  -webkit-user-select: none; user-select: none;
+  -webkit-touch-callout: none;         /* sem menu ao segurar o dedo no iPhone */
+}
 button:focus-visible, input:focus-visible { outline: 3px solid var(--ouro); outline-offset: 3px; }
 
 /* ---------- Moldura de enfeites ---------- */
@@ -51,7 +65,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--ouro); outl
   z-index: 1;
   max-width: 1040px;
   margin: 0 auto;
-  padding: max(10px, env(safe-area-inset-top)) clamp(14px, 4vw, 40px) 70px;
+  padding: max(10px, env(safe-area-inset-top)) max(clamp(14px, 4vw, 40px), env(safe-area-inset-right)) 70px max(clamp(14px, 4vw, 40px), env(safe-area-inset-left));
 }
 
 .topo { display: flex; justify-content: center; align-items: center; position: relative; padding: 6px 0 4px; }
@@ -116,7 +130,8 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--ouro); outl
   box-shadow: 0 7px 0 #7d1019;
   transition: transform 0.1s, box-shadow 0.1s;
 }
-.btn-grande:hover { transform: translateY(-2px); }
+/* efeitos de passar o mouse só onde existe mouse (no toque eles ficariam presos) */
+@media (hover: hover) { .btn-grande:hover { transform: translateY(-2px); } }
 .btn-grande:active { transform: translateY(5px); box-shadow: 0 2px 0 #7d1019; }
 
 .btn-sec {
@@ -163,7 +178,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--ouro); outl
   box-shadow: var(--sombra);
   transition: transform 0.15s;
 }
-.escolha:hover { transform: translateY(-4px) rotate(-1deg); }
+@media (hover: hover) { .escolha:hover { transform: translateY(-4px) rotate(-1deg); } }
 .escolha-icone { font-size: 34px; line-height: 1.1; color: var(--azul); }
 .idioma {
   display: inline-block; padding: 2px 12px; border-radius: 10px;
@@ -185,7 +200,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--ouro); outl
   box-shadow: var(--sombra);
   transition: transform 0.15s;
 }
-button.personagem:hover { transform: translateY(-4px) rotate(-1deg); }
+@media (hover: hover) { button.personagem:hover { transform: translateY(-4px) rotate(-1deg); } }
 .personagem-foto {
   display: flex; align-items: center; justify-content: center;
   aspect-ratio: 4 / 3; border-radius: 14px;
@@ -356,7 +371,7 @@ button.personagem:hover { transform: translateY(-4px) rotate(-1deg); }
   box-shadow: 0 4px 0 #c9cfee;
   transition: transform 0.1s, background 0.15s;
 }
-.opcao:not(:disabled):hover { background: #e6eaff; border-color: var(--azul-medio); }
+@media (hover: hover) { .opcao:not(:disabled):hover { background: #e6eaff; border-color: var(--azul-medio); } }
 .opcao:not(:disabled):active { transform: translateY(3px); box-shadow: 0 1px 0 #c9cfee; }
 .opcao:disabled { cursor: default; opacity: 0.55; }
 .opcao.certa { opacity: 1; background: #dcf6e7; border-color: var(--verde); box-shadow: 0 4px 0 var(--verde); }
@@ -374,7 +389,7 @@ button.personagem:hover { transform: translateY(-4px) rotate(-1deg); }
   animation: entrar 0.2s ease;
 }
 .modal {
-  width: min(560px, 100%); max-height: 90vh; overflow: auto;
+  width: min(560px, 100%); max-height: 90vh; max-height: 90dvh; overflow: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
   background: #fffaf0;
   border: 5px solid var(--ouro); border-radius: 24px;
   box-shadow: 0 10px 0 rgba(10, 14, 45, 0.45);
@@ -431,7 +446,7 @@ tr.errado .c-sit, tr.pendente .c-sit { color: var(--vermelho); }
 .confete span { position: absolute; top: -40px; font-size: 26px; animation: cair linear forwards; }
 @keyframes cair { to { transform: translateY(110vh) rotate(540deg); } }
 
-.credito { position: relative; z-index: 1; text-align: center; padding: 0 12px 20px; font-size: 14px; color: #c9d0ff; }
+.credito { position: relative; z-index: 1; text-align: center; padding: 0 12px max(20px, env(safe-area-inset-bottom)); font-size: 14px; color: #c9d0ff; }
 
 /* ---------- Celular ---------- */
 @media (max-width: 640px) {

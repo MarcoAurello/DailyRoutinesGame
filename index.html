@@ -9,6 +9,8 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="My Day">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
   <title>My Day — English Academy</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="icons/icon-192.png">
@@ -16,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
   <!-- moldura de estrelas, relógios e balões -->
@@ -38,7 +40,7 @@
       <form class="cartao cartao-estreito" id="form-nome" autocomplete="off">
         <label class="campo">
           <span>Seu nome · <i>your name</i></span>
-          <input type="text" id="nome" maxlength="40" placeholder="Digite seu nome" required>
+          <input type="text" id="nome" maxlength="40" placeholder="Digite seu nome" required autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="go">
         </label>
         <p class="erro" id="erro-nome" role="alert"></p>
         <button class="btn-grande" type="submit">Let's go ▶</button>
@@ -213,8 +215,8 @@
   </footer>
 
   <script src="vendor/jspdf.umd.min.js"></script>
-  <script src="dados.js?v=5"></script>
-  <script src="jogo.js?v=5"></script>
+  <script src="dados.js?v=6"></script>
+  <script src="jogo.js?v=6"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));

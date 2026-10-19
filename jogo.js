@@ -40,6 +40,7 @@
     if (!somLigado) return;
     try {
       ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') ctx.resume();
       let t = ctx.currentTime;
       for (const [freq, dur, tipo = 'triangle'] of notas) {
         const o = ctx.createOscillator(), v = ctx.createGain();
@@ -69,9 +70,28 @@
   // ---------- Áudios do professor ----------
   // 1) Se existir a gravação (audio/professor/<nome>.mp3, .m4a ou .wav), toca a gravação.
   // 2) Senão, lê o texto com a voz do aparelho. A lista de gravações está em GRAVAR.md.
-  const EXTENSOES = ['mp3', 'm4a', 'wav'];
-  const naoExiste = new Set();
-  let audioAtual = null;
+  // iPhone e Android só deixam tocar som que começa junto com um toque na tela. Por isso:
+  // - um único player, "destravado" no primeiro toque, é reaproveitado para todas as gravações;
+  // - quais gravações existem é descoberto ao abrir o jogo, para o som começar na hora do toque
+  //   (sem esperar a internet, o que faria o aparelho bloquear o som).
+  const EXTENSOES = ['m4a', 'mp3', 'wav'];
+  const GRAVACOES = ['explicacao', 'acerto-1', 'acerto-2', 'acerto-3', 'erro-1', 'erro-2', 'erro-3', 'lembrete-agenda'];
+  const gravacao = {};   // nome -> endereço do arquivo, ou null quando não existe
+  const player = new Audio();
+  player.preload = 'auto';
+  player.setAttribute('playsinline', '');
+
+  async function procurarGravacao(nome) {
+    for (const ext of EXTENSOES) {
+      const src = `audio/professor/${nome}.${ext}`;
+      try {
+        const r = await fetch(src, { method: 'HEAD', cache: 'no-cache' });
+        if (r.ok) return src;
+      } catch (e) { /* sem internet: usa a voz do aparelho */ }
+    }
+    return null;
+  }
+  const procurando = Promise.all(GRAVACOES.map(async (n) => { gravacao[n] = await procurarGravacao(n); }));
 
   const FALAS = {
     acerto: ['Great job! Mandou bem!', 'Excellent! Isso aí!', 'Well done! Perfeito!'],
@@ -79,26 +99,33 @@
     lembrete: 'Psiu! As atividades estão na agenda. Open the agenda!',
   };
 
-  function tocarGravacao(nome) {
-    return new Promise((ok) => {
-      const tentativas = EXTENSOES.map((e) => `audio/professor/${nome}.${e}`).filter((s) => !naoExiste.has(s));
-      const tentar = () => {
-        const src = tentativas.shift();
-        if (!src) return ok(false);
-        const a = new Audio(src);
-        let resolvido = false;
-        const falhou = () => { if (resolvido) return; resolvido = true; naoExiste.add(src); tentar(); };
-        a.onerror = falhou;
-        a.play()
-          .then(() => { if (resolvido) return; resolvido = true; audioAtual = a; ok(true); })
-          .catch((e) => {
-            if (e && e.name === 'NotAllowedError') { resolvido = true; ok(false); return; }
-            falhou();
-          });
-      };
-      tentar();
-    });
+  // destrava som, gravação e voz no primeiro toque (exigência do iPhone)
+  const SILENCIO = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+  let destravado = false;
+  function destravar() {
+    if (destravado) return;
+    destravado = true;
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') ctx.resume();
+    } catch (e) { /* sem áudio */ }
+    if (!player.src || player.paused) {
+      player.src = SILENCIO;
+      const p = player.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+    if (window.speechSynthesis) {
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0;
+      speechSynthesis.speak(u);
+    }
   }
+  ['pointerdown', 'touchend', 'click', 'keydown'].forEach((ev) => document.addEventListener(ev, destravar, { capture: true }));
+
+  let vozes = [];
+  const carregarVozes = () => { if (window.speechSynthesis) vozes = speechSynthesis.getVoices(); };
+  carregarVozes();
+  if (window.speechSynthesis && 'onvoiceschanged' in speechSynthesis) speechSynthesis.onvoiceschanged = carregarVozes;
 
   function vozDoAparelho(texto) {
     if (!window.speechSynthesis) return;
@@ -106,23 +133,32 @@
     const f = new SpeechSynthesisUtterance(texto);
     f.lang = 'pt-BR';
     f.rate = 1;
-    const vozes = speechSynthesis.getVoices().filter((v) => v.lang && v.lang.toLowerCase().startsWith('pt'));
-    const preferida = vozes.find((v) => /pt.br/i.test(v.lang)) || vozes[0];
+    const pt = vozes.filter((v) => v.lang && v.lang.toLowerCase().replace('_', '-').startsWith('pt'));
+    const preferida = pt.find((v) => /pt-br/i.test(v.lang.replace('_', '-'))) || pt[0];
     if (preferida) f.voice = preferida;
     speechSynthesis.speak(f);
   }
-  if (window.speechSynthesis) speechSynthesis.getVoices();
 
   function pararVoz() {
-    if (audioAtual) { audioAtual.pause(); audioAtual = null; }
+    try { player.pause(); } catch (e) { /* nada tocando */ }
     if (window.speechSynthesis) speechSynthesis.cancel();
   }
 
-  async function professor(nome, texto) {
+  function professor(nome, texto) {
     if (!somLigado) return;
     pararVoz();
-    if (await tocarGravacao(nome)) return;
-    if (texto) vozDoAparelho(texto);
+    const tocar = () => {
+      const src = gravacao[nome];
+      if (src) {
+        player.src = src;
+        const p = player.play();
+        if (p && p.catch) p.catch(() => { if (texto) vozDoAparelho(texto); });
+      } else if (texto) {
+        vozDoAparelho(texto);
+      }
+    };
+    // normalmente já sabemos quais gravações existem; se ainda não, espera a busca terminar
+    if (nome in gravacao) tocar(); else procurando.then(tocar);
   }
 
   // acerto e erro: 3 variações sorteadas (acerto-1..3, erro-1..3)
@@ -475,7 +511,7 @@
 
   // ---------- Sair da partida ----------
   function pedirSair() {
-    if (encerrada) return;
+    if (encerrada || pausaInicio) return;
     SOM.clique();
     pausaInicio = Date.now();
     clearTimeout(lembreteTimer);
@@ -504,6 +540,10 @@
     mostrar('tela-modo');
   }
   $('btn-sair').onclick = pedirSair;
+  // ligação, troca de app ou tela bloqueada no meio da partida: pausa o tempo e mostra o aviso
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && !encerrada && $('tela-jogo').classList.contains('ativa')) { pararVoz(); pedirSair(); }
+  });
   $('sair-continuar').onclick = continuar;
   $('sair-confirmar').onclick = () => { SOM.clique(); sair(); };
   $('modal-sair').onclick = (e) => { if (e.target === $('modal-sair')) continuar(); };
@@ -595,7 +635,29 @@
     });
   }
 
-  async function baixarPDF() {
+  // o logo já fica pronto ao abrir o jogo: assim o PDF sai na hora do toque (o iPhone exige isso para compartilhar)
+  let logoPDF = null;
+  imagemComoDataURL('assets/marca.png').then((l) => { logoPDF = l; }).catch(() => {});
+
+  const ehIOS = /iphone|ipad|ipod/i.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);   // iPad se apresenta como Mac
+
+  // iPhone/iPad: abre o menu de compartilhar (Salvar em Arquivos, WhatsApp...), que funciona também no app instalado.
+  // Android e computador: baixa o arquivo direto.
+  function entregarPDF(doc, nome) {
+    if (ehIOS && navigator.canShare && window.File) {
+      const arquivo = new File([doc.output('blob')], nome, { type: 'application/pdf' });
+      if (navigator.canShare({ files: [arquivo] })) {
+        navigator.share({ files: [arquivo], title: 'My Day - Relatório' }).catch((e) => {
+          if (!e || e.name !== 'AbortError') doc.save(nome);
+        });
+        return;
+      }
+    }
+    doc.save(nome);
+  }
+
+  function baixarPDF() {
     if (!resultado) return;
     const lib = window.jspdf;
     if (!lib || !lib.jsPDF) { window.print(); return; }
@@ -651,8 +713,8 @@
 
     // cabeçalho com a marca
     try {
-      const logo = await imagemComoDataURL('assets/marca.png');
-      doc.addImage(logo.url, 'PNG', L, y - 4, 24, 24 * logo.h / logo.w, undefined, 'FAST');
+      const logo = logoPDF;
+      if (logo) doc.addImage(logo.url, 'PNG', L, y - 4, 24, 24 * logo.h / logo.w, undefined, 'FAST');
     } catch (e) { /* sem logo */ }
     doc.setFont('helvetica', 'bold'); doc.setFontSize(22); doc.setTextColor(...AZUL);
     doc.text('My Day - Relatório', L + 30, y + 6);
@@ -713,11 +775,11 @@
       doc.text('My Day - English Academy - © Marco Nunes - Todos os direitos reservados', L, 290);
       doc.text(`${i}/${paginas}`, L + LARG, 290, { align: 'right' });
     }
-    doc.save(`my-day-${nomeArquivo(r.aluno)}-${nomeArquivo(r.personagem.nome)}.pdf`);
+    entregarPDF(doc, `my-day-${nomeArquivo(r.aluno)}-${nomeArquivo(r.personagem.nome)}.pdf`);
   }
 
   // ---------- Botões do fim ----------
-  $('btn-pdf').onclick = () => { baixarPDF().catch(() => window.print()); };
+  $('btn-pdf').onclick = () => { try { baixarPDF(); } catch (e) { window.print(); } };
   $('btn-repetir').onclick = () => { SOM.clique(); comecar(); };
   $('btn-menu').onclick = () => { SOM.clique(); mostrar('tela-modo'); };
 
