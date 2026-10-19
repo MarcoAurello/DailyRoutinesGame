@@ -236,13 +236,13 @@
     const idiomaAgenda = modo === 'pt-en' ? 'em português' : 'em inglês';
     const idiomaFrases = modo === 'pt-en' ? 'em inglês' : 'em português';
     return {
-      html: `<b>Hello, ${seguro(aluno)}!</b> Acompanhe o dia da <b>${seguro(n)}</b>, das <b>9h às 18h</b>.<br>
+      html: `<b>Hello, ${seguro(aluno)}!</b> Acompanhe o dia d${personagem.artigo} <b>${seguro(n)}</b>, das <b>9h às 18h</b>.<br>
         ⏰ Escolha a hora no relógio <b>◀ ▶</b>.<br>
-        📒 Veja na <b>Agenda</b> (${idiomaAgenda}) o que ela faz.<br>
+        📒 Veja na <b>Agenda</b> (${idiomaAgenda}) o que ${personagem.pronome.pt} faz.<br>
         ✅ Escolha a frase certa ${idiomaFrases}. Errou? A hora fica bloqueada!<br>
         ⏱ Você tem <b>${DURACAO} segundos</b>. <b>Good luck!</b>`,
       // áudio curto: o texto completo fica na tela
-      falado: `Hello, ${aluno}! Escolha a hora no relógio, veja na agenda o que a ${n} faz e escolha a frase certa. `
+      falado: `Hello, ${aluno}! Escolha a hora no relógio, veja na agenda o que ${personagem.artigo} ${n} faz e escolha a frase certa. `
         + `Você tem ${DURACAO} segundos. Good luck!`,
     };
   }
@@ -342,8 +342,8 @@
       marcarAgenda('lembrar');
       sprite('sprite-jogo', 'ideia');
       balao(origem() === 'pt'
-        ? '💡 <b>Psiu!</b> As atividades estão na <b>📒 Agenda</b>! Abra para ver o que ela faz às ' + horaTexto(horas[hora].hora) + '.'
-        : '💡 <b>Psst!</b> The activities are in the <b>📒 Agenda</b>! Open it to see what she does at ' + horaTexto(horas[hora].hora) + '.', 'lembrete');
+        ? '💡 <b>Psiu!</b> As atividades estão na <b>📒 Agenda</b>! Abra para ver o que ' + personagem.pronome.pt + ' faz às ' + horaTexto(horas[hora].hora) + '.'
+        : '💡 <b>Psst!</b> The activities are in the <b>📒 Agenda</b>! Open it to see what ' + personagem.pronome.en + ' does at ' + horaTexto(horas[hora].hora) + '.', 'lembrete');
       // a voz só nas duas primeiras vezes, para não cansar
       if (lembretesFalados < 2) { lembretesFalados++; professor('lembrete-agenda', FALAS.lembrete); }
     }, LEMBRETE * 1000);
@@ -393,7 +393,7 @@
     if (h.estado === 'pendente') {
       sprite('sprite-jogo', 'pensando');
       balao(modo === 'pt-en'
-        ? `O que a <b>${seguro(personagem.nome)}</b> faz às <b>${horaTexto(h.hora)}</b>? Confira na <b>📒 Agenda</b>!`
+        ? `O que ${personagem.artigo} <b>${seguro(personagem.nome)}</b> faz às <b>${horaTexto(h.hora)}</b>? Confira na <b>📒 Agenda</b>!`
         : `What does <b>${seguro(personagem.nome)}</b> do at <b>${horaTexto(h.hora)}</b>? Check the <b>📒 Agenda</b>!`);
     } else if (h.estado === 'certo') {
       sprite('sprite-jogo', 'acertou');
@@ -456,7 +456,7 @@
     if ($('balao-jogo').classList.contains('lembrete')) desenharHora();
     const o = origem();
     const feito = o === 'pt' ? 'feito' : 'done';
-    $('agenda-titulo').textContent = `📒 ${o === 'pt' ? 'Agenda da' : 'Agenda:'} ${personagem.nome}`;
+    $('agenda-titulo').textContent = `📒 ${o === 'pt' ? 'Agenda d' + personagem.artigo : 'Agenda:'} ${personagem.nome}`;
     $('lista-agenda').innerHTML = horas.map((h, i) => `
       <li class="${h.estado}${i === atual ? ' atual' : ''}">
         <span class="agenda-hora">${horaTexto(h.hora)}</span>

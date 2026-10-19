@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "time": "09:00",
+    "question": "What does Police Officer Jack do at 09:00?",
+    "question_pt": "O que o Policial Jack faz às 09:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Start the shift and check the police radio.",
+        "text_pt": "Iniciar o turno e verificar o rádio da polícia.",
+        "is_correct": true,
+        "explanation": "Correto! Uso adequado dos verbos e coerente com a rotina de trabalho policial."
+      },
+      {
+        "id": "b",
+        "text_en": "He sleep on the floor at noon time.",
+        "text_pt": "Ele dormir no chão no horário do meio-dia.",
+        "is_correct": false,
+        "explanation": "Erro no verbo ('sleep' sem 's'), uso incorreto de tempo ('noon time' às 09:00) e atividade inadequada para o início do turno."
+      },
+      {
+        "id": "c",
+        "text_en": "Sleeping for go to the beach fastly.",
+        "text_pt": "Dormindo para ir para a praia rápido.",
+        "is_correct": false,
+        "explanation": "Uso incorreto de 'for go' (deveria ser 'to go') e a palavra 'fastly' não existe em inglês."
+      },
+      {
+        "id": "d",
+        "text_en": "Eat a heavy dinner because is very late night.",
+        "text_pt": "Comer um jantar pesado porque é muito tarde da noite.",
+        "is_correct": false,
+        "explanation": "Falta o sujeito 'it' em 'because it is' e contradição de horário (09:00 da manhã não é noite)."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "time": "10:00",
+    "question": "What does Police Officer Jack do at 10:00?",
+    "question_pt": "O que o Policial Jack faz às 10:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Driving the patrol car around the city.",
+        "text_pt": "Dirigindo o carro de patrulha pela cidade.",
+        "is_correct": false,
+        "explanation": "Uso incorreto do gerúndio isolado ('Driving' sem o verbo auxiliar 'is')."
+      },
+      {
+        "id": "b",
+        "text_en": "Patrol the streets in the police car.",
+        "text_pt": "Patrulhar as ruas no carro de polícia.",
+        "is_correct": true,
+        "explanation": "Correto! Frase simples, gramática correta e típica da rotina de patrulhamento."
+      },
+      {
+        "id": "c",
+        "text_en": "She fly a helicopter with juice.",
+        "text_pt": "Ela voar um helicóptero com suco.",
+        "is_correct": false,
+        "explanation": "Pronome incorreto ('She' para o Policial Jack), falta de 's' em 'flies' e contexto ilógico (voar com suco)."
+      },
+      {
+        "id": "d",
+        "text_en": "Bake cakes inside the station roof.",
+        "text_pt": "Assar bolos dentro do telhado da delegacia.",
+        "is_correct": false,
+        "explanation": "Atividade completamente fora de contexto para um policial em serviço às 10h."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "time": "11:00",
+    "question": "What does Police Officer Jack do at 11:00?",
+    "question_pt": "O que o Policial Jack faz às 11:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Review incident reports at the precinct.",
+        "text_pt": "Revisar relatórios de ocorrências na delegacia.",
+        "is_correct": true,
+        "explanation": "Correto! Atividade administrativa coerente antes do horário de almoço."
+      },
+      {
+        "id": "b",
+        "text_en": "Running heavy metal concerts and jump.",
+        "text_pt": "Correndo concertos de heavy metal e pular.",
+        "is_correct": false,
+        "explanation": "Mistura de verbos sem concordância e atividade inadequada para o trabalho policial."
+      },
+      {
+        "id": "c",
+        "text_en": "She write reports without any pen.",
+        "text_pt": "Ela escrever relatórios sem nenhuma caneta.",
+        "is_correct": false,
+        "explanation": "Pronome feminino ('She') para o Jack, falta de 's' em 'writes' e contradição lógica (escrever sem caneta)."
+      },
+      {
+        "id": "d",
+        "text_en": "Sleeped on desk while drive fastly.",
+        "text_pt": "Dormiu na mesa enquanto dirigir rápido.",
+        "is_correct": false,
+        "explanation": "Erro de tempo verbal ('sleeped' não existe, o correto é 'slept'), uso incorreto após 'while' e advérbio inexistente 'fastly'."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "time": "12:00",
+    "question": "What does Police Officer Jack do at 12:00?",
+    "question_pt": "O que o Policial Jack faz às 12:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Eating a breakfast at midnight.",
+        "text_pt": "Comendo um café da manhã à meia-noite.",
+        "is_correct": false,
+        "explanation": "Confusão de refeição e horário (meia-noite em vez de meio-dia)."
+      },
+      {
+        "id": "b",
+        "text_en": "He have lunch at the station cafeteria.",
+        "text_pt": "Ele almoçar na cafeteria da delegacia.",
+        "is_correct": false,
+        "explanation": "Erro de concordância verbal ('He have' deveria ser 'He has')."
+      },
+      {
+        "id": "c",
+        "text_en": "Have a lunch break and eat a sandwich.",
+        "text_pt": "Fazer uma pausa para o almoço e comer um sanduíche.",
+        "is_correct": true,
+        "explanation": "Correto! Estrutura adequada para a pausa de almoço do policial."
+      },
+      {
+        "id": "d",
+        "text_en": "Has lunching fast food every morning.",
+        "text_pt": "Almoçando fast food toda manhã.",
+        "is_correct": false,
+        "explanation": "Construção gramatical incorreta ('Has lunching') e horário incompatível."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "time": "13:00",
+    "question": "What does Police Officer Jack do at 13:00?",
+    "question_pt": "O que o Policial Jack faz às 13:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Conduct a community security meeting.",
+        "text_pt": "Conduzir uma reunião de segurança comunitária.",
+        "is_correct": true,
+        "explanation": "Correto! Atividade profissional comum no início da tarde."
+      },
+      {
+        "id": "b",
+        "text_en": "Sleeping for ten hours under the sun.",
+        "text_pt": "Dormindo por dez horas debaixo do sol.",
+        "is_correct": false,
+        "explanation": "Exagero ilógico e incompatível com o horário de trabalho."
+      },
+      {
+        "id": "c",
+        "text_en": "Takes a meeting while running outside.",
+        "text_pt": "Faz uma reunião enquanto corre lá fora.",
+        "is_correct": false,
+        "explanation": "Concordância incorreta do verbo com o sujeito implícito e situação sem sentido."
+      },
+      {
+        "id": "d",
+        "text_en": "He don't works never in afternoon.",
+        "text_pt": "Ele não trabalha nunca à tarde.",
+        "is_correct": false,
+        "explanation": "Dupla negação incorreta ('don't' + 'never') e verbo com 's' incorreto após auxiliar."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "time": "14:00",
+    "question": "What does Police Officer Jack do at 14:00?",
+    "question_pt": "O que o Policial Jack faz às 14:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Inspect local businesses for safety.",
+        "text_pt": "Inspecionar comércios locais quanto à segurança.",
+        "is_correct": true,
+        "explanation": "Correto! Perfeitamente alinhado com as funções de patrulha e segurança pública."
+      },
+      {
+        "id": "b",
+        "text_en": "Inspecting stores with eyes closed.",
+        "text_pt": "Inspecionando lojas com os olhos fechados.",
+        "is_correct": false,
+        "explanation": "Contradição lógica (inspecionar de olhos fechados)."
+      },
+      {
+        "id": "c",
+        "text_en": "She inspect a dark screen in no light.",
+        "text_pt": "Ela inspeciona uma tela escura na sem luz.",
+        "is_correct": false,
+        "explanation": "Erro de concordância ('inspect' sem 's'), pronome errado e estrutura em inglês sem sentido."
+      },
+      {
+        "id": "d",
+        "text_en": "Writes three books in one hour fastly.",
+        "text_pt": "Escreve três livros em uma hora rápido.",
+        "is_correct": false,
+        "explanation": "Atividade ilógica para um policial e uso do advérbio inexistente 'fastly'."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "time": "15:00",
+    "question": "What does Police Officer Jack do at 15:00?",
+    "question_pt": "O que o Policial Jack faz às 15:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Respond to a traffic assistance call.",
+        "text_pt": "Atender a um chamado de assistência de trânsito.",
+        "is_correct": true,
+        "explanation": "Correto! Resposta típica a ocorrências de trânsito."
+      },
+      {
+        "id": "b",
+        "text_en": "Calling to a stranger on toy phone.",
+        "text_pt": "Ligando para um estranho em telefone de brinquedo.",
+        "is_correct": false,
+        "explanation": "Regência incorreta ('call to') e contexto infantilizado inadequado."
+      },
+      {
+        "id": "c",
+        "text_en": "She call her friend with no telephone.",
+        "text_pt": "Ela liga para a amiga dela sem telefone.",
+        "is_correct": false,
+        "explanation": "Pronome incorreto ('She'), falta de 's' em 'call' e contradição lógica."
+      },
+      {
+        "id": "d",
+        "text_en": "Calls all city for a big party now.",
+        "text_pt": "Liga para toda a cidade para uma festa grande agora.",
+        "is_correct": false,
+        "explanation": "Falta de artigo ('all the city') e fora de contexto profissional."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "time": "16:00",
+    "question": "What does Police Officer Jack do at 16:00?",
+    "question_pt": "O que o Policial Jack faz às 16:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Drink hot coffee in the shower room.",
+        "text_pt": "Beber café quente no banheiro.",
+        "is_correct": false,
+        "explanation": "Local totalmente inadequado e ilógico para o descanso do policial."
+      },
+      {
+        "id": "b",
+        "text_en": "Have a quick coffee break at the station.",
+        "text_pt": "Fazer uma pausa rápida para o café na delegacia.",
+        "is_correct": true,
+        "explanation": "Correto! Pausa lógica para o meio da tarde no trabalho."
+      },
+      {
+        "id": "c",
+        "text_en": "She having afternoon dinner with salt.",
+        "text_pt": "Ela tendo jantar da tarde com sal.",
+        "is_correct": false,
+        "explanation": "Falta do verbo auxiliar 'is', pronome incorreto e uso de 'dinner' às 16h."
+      },
+      {
+        "id": "d",
+        "text_en": "Eats biscuits with hot coffee at 4 am.",
+        "text_pt": "Come biscoitos com café quente às 4 da manhã.",
+        "is_correct": false,
+        "explanation": "Erro de horário ('4 am' é de madrugada, não 16h)."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "time": "17:00",
+    "question": "What does Police Officer Jack do at 17:00?",
+    "question_pt": "O que o Policial Jack faz às 17:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Run very fast in the midnight marathon.",
+        "text_pt": "Correr muito rápido na maratona da meia-noite.",
+        "is_correct": false,
+        "explanation": "Incompatível com o fim do expediente policial e conflito de horário."
+      },
+      {
+        "id": "b",
+        "text_en": "She takes a walk inside the closet.",
+        "text_pt": "Ela faz uma caminhada dentro do armário.",
+        "is_correct": false,
+        "explanation": "Pronome incorreto e local absurdo ('inside the closet')."
+      },
+      {
+        "id": "c",
+        "text_en": "Complete end-of-shift paperwork.",
+        "text_pt": "Completar a papelada de fim de turno.",
+        "is_correct": true,
+        "explanation": "Correto! Tarefa padrão de encerramento de turno para um policial."
+      },
+      {
+        "id": "d",
+        "text_en": "Walking gentley on the beach in storm.",
+        "text_pt": "Caminhando levemente na praia na tempestade.",
+        "is_correct": false,
+        "explanation": "Erro de grafia em 'gentley' (o correto é 'gently') e contexto perigoso/inadequado."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "time": "18:00",
+    "question": "What does Police Officer Jack do at 18:00?",
+    "question_pt": "O que o Policial Jack faz às 18:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Finish the shift and head home to rest.",
+        "text_pt": "Terminar o turno e ir para casa descansar.",
+        "is_correct": true,
+        "explanation": "Correto! Encerramento perfeito para a rotina diária das 9h às 18h."
+      },
+      {
+        "id": "b",
+        "text_en": "Watching TV with the TV turned off.",
+        "text_pt": "Assistindo TV com a TV desligada.",
+        "is_correct": false,
+        "explanation": "Contradição lógica (assistir televisão com o aparelho desligado)."
+      },
+      {
+        "id": "c",
+        "text_en": "She watch morning cartoon on radio.",
+        "text_pt": "Ela assiste desenho da manhã no rádio.",
+        "is_correct": false,
+        "explanation": "Concordância incorreta, pronome errado e mistura impossível de mídias/horários."
+      },
+      {
+        "id": "d",
+        "text_en": "Finished shift at 8 o'clock morning.",
+        "text_pt": "Terminou o turno às 8 horas da manhã.",
+        "is_correct": false,
+        "explanation": "Contradição de horário (8 da manhã para um evento das 18h)."
+      }
+    ]
+  }
+]

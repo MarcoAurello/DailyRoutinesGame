@@ -2,7 +2,8 @@
 
 - marca.jpg            -> assets/marca.png (fundo transparente)
 - marca.jpg            -> icons/ (ícones do app)
-- joana/dona joana.jpg -> personagens/joana/capa.jpg (menor, para carregar rápido no celular)
+- policialjack/jack.jpg -> personagens/jack/capa.jpg (recorte quadrado no personagem, menor para o celular)
+  (a capa da Dona Joana foi recortada à mão e não é gerada aqui)
 
 Uso: python ferramentas/marca.py
 """
@@ -11,6 +12,12 @@ from pathlib import Path
 from PIL import Image
 
 RAIZ = Path(__file__).resolve().parent.parent
+
+
+# capas: imagem original, personagem e recorte (x0, y0, x1, y1)
+CAPAS = [
+    ('policialjack/jack.jpg', 'jack', (330, 0, 1100, 768)),
+]
 
 
 def sem_fundo(img, tol=28):
@@ -41,9 +48,11 @@ def main():
         m = marca.copy(); m.thumbnail((int(lado * (1 - 2 * margem)),) * 2, Image.LANCZOS)
         tela.alpha_composite(m, ((lado - m.width) // 2, (lado - m.height) // 2))
         tela.save(icons / nome, optimize=True)
-    capa = Image.open(RAIZ / 'joana' / 'dona joana.jpg').convert('RGB')
-    capa.thumbnail((960, 960), Image.LANCZOS)
-    capa.save(RAIZ / 'personagens' / 'joana' / 'capa.jpg', quality=82, optimize=True, progressive=True)
+    for origem, id_, caixa in CAPAS:
+        capa = Image.open(RAIZ / origem).convert('RGB').crop(caixa)
+        capa.thumbnail((640, 640), Image.LANCZOS)
+        (RAIZ / 'personagens' / id_).mkdir(parents=True, exist_ok=True)
+        capa.save(RAIZ / 'personagens' / id_ / 'capa.jpg', quality=82, optimize=True, progressive=True)
     print('ok', marca.size)
 
 

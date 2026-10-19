@@ -12,7 +12,7 @@ Funciona no celular, no tablet e no computador, e pode ser instalado como app (P
 1. **Nome** do aluno (vai para o relatório).
 2. **Modo**: português → inglês ou inglês → português.
 3. **Nível**: fácil (frases curtas) ou difícil (frases completas, erradas quase iguais à certa).
-4. **Personagem**: por enquanto só a **Dona Joana**; os outros 4 aparecem como "em breve".
+4. **Personagem**: **Dona Joana** e **Policial Jack**; os outros 3 aparecem como "em breve".
 5. **Explicação** do professor (gravação ou voz do aparelho).
 6. **Jogo**: 200 segundos (o dobro do planejamento), relógio digital com ◀ ▶, indicador das 10 horas, botão **Agenda**
    (rotina no idioma de origem) e 4 alternativas no idioma de destino.
@@ -35,11 +35,11 @@ Funciona no celular, no tablet e no computador, e pode ser instalado como app (P
 - `index.html`, `style.css` — telas e visual (cores da English Academy)
 - `jogo.js` — fluxo, cronômetro, pontuação, agenda, sons, áudios do professor e PDF
 - `dados.js` — personagens e as frases de cada hora (fácil e difícil, certa + 3 erradas, PT e EN)
-- `personagens/joana/` — `sprites.png` (folha de sprites) e `capa.jpg`
+- `personagens/<id>/` — `sprites.png` (folha de sprites) e `capa.jpg` de cada personagem
 - `assets/marca.png`, `icons/` — marca sem fundo e ícones do app
 - `audio/professor/` — gravações do professor (lista em `GRAVAR.md`)
 - `vendor/jspdf.umd.min.js` — gera o PDF no próprio aparelho
-- `ferramentas/sprites.py` — recorta `joana/sprites.jpg` e monta a folha de sprites
+- `ferramentas/sprites.py` — recorta as imagens de sprites (fundo branco ou cinza) e monta a folha de cada personagem
 - `ferramentas/marca.py` — tira o fundo da marca, gera os ícones e a capa
 
 ## Para adicionar um personagem

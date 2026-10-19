@@ -3,7 +3,8 @@
    Cada personagem tem 10 atividades (9h às 18h). Cada atividade tem a versão fácil e a difícil,
    com a frase certa e 3 erradas, sempre em português (pt) e em inglês (en).
    RASCUNHO: as frases da Dona Joana foram criadas a partir das ideias do planejamento
-   e precisam da revisão do professor.
+   e precisam da revisão do professor. As do Policial Jack partem das frases certas de
+   policialjack/rotinajack.txt; as erradas seguem o planejamento (frases parecidas, sem erro de gramática).
 
    Sprites: folha personagens/<id>/sprites.png (gerada por ferramentas/sprites.py).
    'quadros' = lista de [coluna, linha] na folha; 'fps' = velocidade da animação. */
@@ -14,6 +15,7 @@ const PERSONAGENS = [
   {
     id: 'joana',
     nome: 'Dona Joana',
+    artigo: 'a', pronome: R('ela', 'she'),   // "o dia da Dona Joana", "o que ela faz"
     icone: '👵',
     cor: '#c8202f',
     apresentacao: R(
@@ -167,11 +169,167 @@ const PERSONAGENS = [
       },
     ],
   },
+  {
+    id: 'jack',
+    nome: 'Policial Jack',
+    artigo: 'o', pronome: R('ele', 'he'),
+    icone: '👮',
+    cor: '#2b3a67',
+    apresentacao: R(
+      'Olá! Eu sou o Policial Jack. Eu cuido da segurança da cidade!',
+      "Hi! I'm Police Officer Jack. I keep the city safe!"
+    ),
+    capa: 'personagens/jack/capa.jpg',
+    sprite: {
+      src: 'personagens/jack/sprites.png',
+      colunas: 8, linhas: 3,           // linhas: 0 comemorando · 1 pensando · 2 triste
+      proporcao: '161 / 234',
+      estados: {
+        oi:       { quadros: [[0, 0], [1, 0]], fps: 2.5 },
+        pensando: { quadros: [[0, 1], [1, 1]], fps: 1.2 },
+        acertou:  { quadros: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]], fps: 8 },
+        festa:    { quadros: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]], fps: 8 },
+        triste:   { quadros: [[0, 2], [1, 2], [2, 2], [1, 2]], fps: 1.5 },
+        ideia:    { quadros: [[5, 1], [6, 1]], fps: 1.2 },
+      },
+    },
+    rotina: [
+      {
+        hora: 9,
+        facil: { certa: R('Começar o meu turno', 'Start my shift'), erradas: [
+          R('Terminar o meu turno', 'End my shift'),
+          R('Ligar o meu carro', 'Start my car'),
+          R('Faltar ao meu turno', 'Skip my shift'),
+        ] },
+        dificil: { certa: R('Começar o meu turno e verificar o rádio da polícia', 'Start my shift and check the police radio'), erradas: [
+          R('Terminar o meu turno e verificar o rádio da polícia', 'End my shift and check the police radio'),
+          R('Começar o meu turno e consertar o rádio da polícia', 'Start my shift and fix the police radio'),
+          R('Começar o meu turno e verificar o carro da polícia', 'Start my shift and check the police car'),
+        ] },
+      },
+      {
+        hora: 10,
+        facil: { certa: R('Patrulhar as ruas', 'Patrol the streets'), erradas: [
+          R('Limpar as ruas', 'Clean the streets'),
+          R('Atravessar as ruas', 'Cross the streets'),
+          R('Patrulhar a praia', 'Patrol the beach'),
+        ] },
+        dificil: { certa: R('Patrulhar as ruas da cidade no carro de polícia', 'Patrol the city streets in the police car'), erradas: [
+          R('Patrulhar as ruas da cidade numa moto de polícia', 'Patrol the city streets on a police motorcycle'),
+          R('Patrulhar os parques da cidade no carro de polícia', 'Patrol the city parks in the police car'),
+          R('Patrulhar as ruas da cidade a pé', 'Patrol the city streets on foot'),
+        ] },
+      },
+      {
+        hora: 11,
+        facil: { certa: R('Revisar relatórios', 'Review reports'), erradas: [
+          R('Escrever relatórios', 'Write reports'),
+          R('Imprimir relatórios', 'Print reports'),
+          R('Revisar e-mails', 'Review emails'),
+        ] },
+        dificil: { certa: R('Revisar os relatórios de ocorrências na delegacia', 'Review the incident reports at the police station'), erradas: [
+          R('Escrever os relatórios de ocorrências na delegacia', 'Write the incident reports at the police station'),
+          R('Revisar os relatórios de ocorrências em casa', 'Review the incident reports at home'),
+          R('Revisar os relatórios de trânsito na delegacia', 'Review the traffic reports at the police station'),
+        ] },
+      },
+      {
+        hora: 12,
+        facil: { certa: R('Almoçar', 'Have lunch'), erradas: [
+          R('Tomar café da manhã', 'Have breakfast'),
+          R('Jantar', 'Have dinner'),
+          R('Fazer o almoço', 'Make lunch'),
+        ] },
+        dificil: { certa: R('Fazer um almoço rápido e comer um sanduíche de frango', 'Have a quick lunch and eat a chicken sandwich'), erradas: [
+          R('Fazer um almoço longo e comer um sanduíche de frango', 'Have a long lunch and eat a chicken sandwich'),
+          R('Fazer um almoço rápido e comer um sanduíche de queijo', 'Have a quick lunch and eat a cheese sandwich'),
+          R('Fazer um almoço rápido e preparar um sanduíche de frango', 'Have a quick lunch and make a chicken sandwich'),
+        ] },
+      },
+      {
+        hora: 13,
+        facil: { certa: R('Ir a uma reunião', 'Go to a meeting'), erradas: [
+          R('Ir a uma festa', 'Go to a party'),
+          R('Sair de uma reunião', 'Leave a meeting'),
+          R('Ir a uma aula', 'Go to a class'),
+        ] },
+        dificil: { certa: R('Conduzir uma reunião de segurança com os moradores do bairro', 'Lead a safety meeting with the neighborhood residents'), erradas: [
+          R('Participar de uma reunião de segurança com os moradores do bairro', 'Attend a safety meeting with the neighborhood residents'),
+          R('Conduzir uma reunião de segurança sem os moradores do bairro', 'Lead a safety meeting without the neighborhood residents'),
+          R('Conduzir uma reunião de segurança com os alunos da escola', 'Lead a safety meeting with the school students'),
+        ] },
+      },
+      {
+        hora: 14,
+        facil: { certa: R('Visitar as lojas', 'Visit the stores'), erradas: [
+          R('Fechar as lojas', 'Close the stores'),
+          R('Limpar as lojas', 'Clean the stores'),
+          R('Visitar as escolas', 'Visit the schools'),
+        ] },
+        dificil: { certa: R('Inspecionar as lojas do bairro com o meu parceiro', 'Inspect the local stores with my partner'), erradas: [
+          R('Inspecionar as lojas do bairro com o meu chefe', 'Inspect the local stores with my boss'),
+          R('Inspecionar as escolas do bairro com o meu parceiro', 'Inspect the local schools with my partner'),
+          R('Visitar as lojas do bairro com o meu parceiro', 'Visit the local stores with my partner'),
+        ] },
+      },
+      {
+        hora: 15,
+        facil: { certa: R('Atender a um chamado', 'Answer a call'), erradas: [
+          R('Fazer uma ligação', 'Make a call'),
+          R('Perder um chamado', 'Miss a call'),
+          R('Responder a um e-mail', 'Answer an email'),
+        ] },
+        dificil: { certa: R('Atender a um chamado de emergência sobre um acidente de carro', 'Answer an emergency call about a car accident'), erradas: [
+          R('Atender a um chamado de emergência sobre um acidente de bicicleta', 'Answer an emergency call about a bike accident'),
+          R('Fazer uma ligação de emergência sobre um acidente de carro', 'Make an emergency call about a car accident'),
+          R('Atender a um chamado de emergência depois de um acidente de carro', 'Answer an emergency call after a car accident'),
+        ] },
+      },
+      {
+        hora: 16,
+        facil: { certa: R('Tomar café', 'Drink coffee'), erradas: [
+          R('Tomar chá', 'Drink tea'),
+          R('Fazer café', 'Make coffee'),
+          R('Comprar café', 'Buy coffee'),
+        ] },
+        dificil: { certa: R('Fazer uma pausa rápida para o café na delegacia', 'Have a quick coffee break at the police station'), erradas: [
+          R('Fazer uma pausa longa para o café na delegacia', 'Have a long coffee break at the police station'),
+          R('Fazer uma pausa rápida para o café na padaria', 'Have a quick coffee break at the bakery'),
+          R('Fazer uma pausa rápida para o chá na delegacia', 'Have a quick tea break at the police station'),
+        ] },
+      },
+      {
+        hora: 17,
+        facil: { certa: R('Preencher formulários', 'Fill out forms'), erradas: [
+          R('Imprimir formulários', 'Print forms'),
+          R('Assinar formulários', 'Sign forms'),
+          R('Perder formulários', 'Lose forms'),
+        ] },
+        dificil: { certa: R('Preencher os formulários de fim de turno na minha mesa', 'Fill out the end-of-shift forms at my desk'), erradas: [
+          R('Preencher os formulários de início de turno na minha mesa', 'Fill out the start-of-shift forms at my desk'),
+          R('Preencher os formulários de fim de turno em casa', 'Fill out the end-of-shift forms at home'),
+          R('Assinar os formulários de fim de turno na minha mesa', 'Sign the end-of-shift forms at my desk'),
+        ] },
+      },
+      {
+        hora: 18,
+        facil: { certa: R('Ir para casa', 'Go home'), erradas: [
+          R('Ir para o trabalho', 'Go to work'),
+          R('Sair de casa', 'Leave home'),
+          R('Ir para a academia', 'Go to the gym'),
+        ] },
+        dificil: { certa: R('Terminar o meu turno e ir para casa descansar', 'Finish my shift and go home to rest'), erradas: [
+          R('Começar o meu turno e ir para casa descansar', 'Start my shift and go home to rest'),
+          R('Terminar o meu turno e ir para casa cozinhar', 'Finish my shift and go home to cook'),
+          R('Terminar o meu turno e ir para a delegacia descansar', 'Finish my shift and go to the police station to rest'),
+        ] },
+      },
+    ],
+  },
 ];
 
 // personagens do planejamento que ainda não têm conteúdo: aparecem como "em breve"
 const EM_BREVE = [
-  { nome: 'Policial', icone: '👮' },
   { nome: 'Influencer', icone: '🤳' },
   { nome: 'Empresário', icone: '💼' },
   { nome: 'Jogador de futebol', icone: '⚽' },
