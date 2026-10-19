@@ -3,8 +3,8 @@
    Cada personagem tem 10 atividades (9h às 18h). Cada atividade tem a versão fácil e a difícil,
    com a frase certa e 3 erradas, sempre em português (pt) e em inglês (en).
    RASCUNHO: as frases da Dona Joana foram criadas a partir das ideias do planejamento
-   e precisam da revisão do professor. As do Policial Jack partem das frases certas de
-   policialjack/rotinajack.txt; as erradas seguem o planejamento (frases parecidas, sem erro de gramática).
+   e precisam da revisão do professor. As do Policial Jack e da Influenciadora Emily partem das
+   frases certas de policialjack/rotinajack.txt e influenciadora emily/rotinaemily.json; as erradas seguem o planejamento (frases parecidas, sem erro de gramática).
 
    Sprites: folha personagens/<id>/sprites.png (gerada por ferramentas/sprites.py).
    'quadros' = lista de [coluna, linha] na folha; 'fps' = velocidade da animação. */
@@ -326,11 +326,165 @@ const PERSONAGENS = [
       },
     ],
   },
+  {
+    id: 'emily',
+    nome: 'Influenciadora Emily',
+    artigo: 'a', pronome: R('ela', 'she'),
+    icone: '🤳',
+    cor: '#8a5cc7',
+    apresentacao: R(
+      'Oi! Eu sou a Emily, influenciadora digital. Siga o meu dia!',
+      "Hi! I'm Emily, a digital influencer. Follow my day!"
+    ),
+    capa: 'personagens/emily/capa.jpg',
+    sprite: {
+      src: 'personagens/emily/sprites.png',
+      colunas: 8, linhas: 3,           // linhas: 0 comemorando · 1 pensando · 2 triste
+      proporcao: '180 / 232',
+      estados: {
+        oi:       { quadros: [[0, 0], [1, 0]], fps: 2.5 },
+        pensando: { quadros: [[0, 1], [2, 1]], fps: 1.2 },
+        acertou:  { quadros: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]], fps: 8 },
+        festa:    { quadros: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]], fps: 8 },
+        triste:   { quadros: [[0, 2], [1, 2], [2, 2], [1, 2]], fps: 1.5 },
+        ideia:    { quadros: [[5, 1]], fps: 1 },
+      },
+    },
+    rotina: [
+      {
+        hora: 9,
+        facil: { certa: R('Gravar stories', 'Record stories'), erradas: [
+          R('Assistir a stories', 'Watch stories'),
+          R('Apagar stories', 'Delete stories'),
+          R('Gravar um podcast', 'Record a podcast'),
+        ] },
+        dificil: { certa: R('Gravar stories da manhã e checar as minhas notificações', 'Record morning stories and check my notifications'), erradas: [
+          R('Gravar stories da noite e checar as minhas notificações', 'Record night stories and check my notifications'),
+          R('Gravar stories da manhã e apagar as minhas notificações', 'Record morning stories and delete my notifications'),
+          R('Assistir a stories da manhã e checar as minhas notificações', 'Watch morning stories and check my notifications'),
+        ] },
+      },
+      {
+        hora: 10,
+        facil: { certa: R('Ir à academia', 'Go to the gym'), erradas: [
+          R('Ir ao shopping', 'Go to the mall'),
+          R('Sair da academia', 'Leave the gym'),
+          R('Ir ao parque', 'Go to the park'),
+        ] },
+        dificil: { certa: R('Treinar na academia com o meu personal trainer', 'Work out at the gym with my personal trainer'), erradas: [
+          R('Treinar no parque com o meu personal trainer', 'Work out at the park with my personal trainer'),
+          R('Treinar na academia sem o meu personal trainer', 'Work out at the gym without my personal trainer'),
+          R('Treinar na academia com a minha melhor amiga', 'Work out at the gym with my best friend'),
+        ] },
+      },
+      {
+        hora: 11,
+        facil: { certa: R('Fazer vídeos', 'Make videos'), erradas: [
+          R('Assistir a vídeos', 'Watch videos'),
+          R('Apagar vídeos', 'Delete videos'),
+          R('Tirar fotos', 'Take photos'),
+        ] },
+        dificil: { certa: R('Criar conteúdo novo e filmar vídeos para os meus canais', 'Create new content and film videos for my channels'), erradas: [
+          R('Criar conteúdo novo e filmar vídeos para os meus amigos', 'Create new content and film videos for my friends'),
+          R('Criar conteúdo novo e editar vídeos para os meus canais', 'Create new content and edit videos for my channels'),
+          R('Copiar conteúdo novo e filmar vídeos para os meus canais', 'Copy new content and film videos for my channels'),
+        ] },
+      },
+      {
+        hora: 12,
+        facil: { certa: R('Almoçar', 'Have lunch'), erradas: [
+          R('Tomar café da manhã', 'Have breakfast'),
+          R('Jantar', 'Have dinner'),
+          R('Pedir o almoço', 'Order lunch'),
+        ] },
+        dificil: { certa: R('Almoçar e postar um story sobre a minha refeição', 'Have lunch and post a story about my meal'), erradas: [
+          R('Jantar e postar um story sobre a minha refeição', 'Have dinner and post a story about my meal'),
+          R('Almoçar e postar uma foto sobre a minha refeição', 'Have lunch and post a photo about my meal'),
+          R('Almoçar e postar um story sobre o meu cachorro', 'Have lunch and post a story about my dog'),
+        ] },
+      },
+      {
+        hora: 13,
+        facil: { certa: R('Ter uma reunião', 'Have a meeting'), erradas: [
+          R('Dar uma festa', 'Have a party'),
+          R('Cancelar uma reunião', 'Cancel a meeting'),
+          R('Ter uma aula', 'Have a class'),
+        ] },
+        dificil: { certa: R('Participar de uma reunião online com as minhas marcas parceiras', 'Attend an online meeting with my brand partners'), erradas: [
+          R('Participar de uma reunião presencial com as minhas marcas parceiras', 'Attend an in-person meeting with my brand partners'),
+          R('Participar de uma reunião online com os meus fãs', 'Attend an online meeting with my fans'),
+          R('Cancelar uma reunião online com as minhas marcas parceiras', 'Cancel an online meeting with my brand partners'),
+        ] },
+      },
+      {
+        hora: 14,
+        facil: { certa: R('Editar fotos', 'Edit photos'), erradas: [
+          R('Tirar fotos', 'Take photos'),
+          R('Imprimir fotos', 'Print photos'),
+          R('Editar textos', 'Edit texts'),
+        ] },
+        dificil: { certa: R('Editar fotos e vídeos para os meus próximos posts', 'Edit photos and videos for my next posts'), erradas: [
+          R('Editar fotos e vídeos para os meus posts antigos', 'Edit photos and videos for my old posts'),
+          R('Apagar fotos e vídeos para os meus próximos posts', 'Delete photos and videos for my next posts'),
+          R('Editar fotos e vídeos para a minha próxima viagem', 'Edit photos and videos for my next trip'),
+        ] },
+      },
+      {
+        hora: 15,
+        facil: { certa: R('Postar um vídeo', 'Post a video'), erradas: [
+          R('Assistir a um vídeo', 'Watch a video'),
+          R('Apagar um vídeo', 'Delete a video'),
+          R('Postar uma foto', 'Post a photo'),
+        ] },
+        dificil: { certa: R('Subir um vídeo novo no meu canal', 'Upload a new video to my channel'), erradas: [
+          R('Subir um vídeo antigo no meu canal', 'Upload an old video to my channel'),
+          R('Subir um vídeo novo no canal da minha amiga', "Upload a new video to my friend's channel"),
+          R('Baixar um vídeo novo do meu canal', 'Download a new video from my channel'),
+        ] },
+      },
+      {
+        hora: 16,
+        facil: { certa: R('Responder comentários', 'Answer comments'), erradas: [
+          R('Apagar comentários', 'Delete comments'),
+          R('Ler comentários', 'Read comments'),
+          R('Responder e-mails', 'Answer emails'),
+        ] },
+        dificil: { certa: R('Fazer uma pausa para o café e responder os comentários dos meus seguidores', "Have a coffee break and answer my followers' comments"), erradas: [
+          R('Fazer uma pausa para o café e apagar os comentários dos meus seguidores', "Have a coffee break and delete my followers' comments"),
+          R('Fazer uma pausa para o almoço e responder os comentários dos meus seguidores', "Have a lunch break and answer my followers' comments"),
+          R('Fazer uma pausa para o café e responder os comentários dos meus amigos', "Have a coffee break and answer my friends' comments"),
+        ] },
+      },
+      {
+        hora: 17,
+        facil: { certa: R('Planejar o meu conteúdo', 'Plan my content'), erradas: [
+          R('Apagar o meu conteúdo', 'Delete my content'),
+          R('Compartilhar o meu conteúdo', 'Share my content'),
+          R('Planejar a minha viagem', 'Plan my trip'),
+        ] },
+        dificil: { certa: R('Analisar os meus números e planejar o conteúdo de amanhã', 'Check my numbers and plan the content for tomorrow'), erradas: [
+          R('Analisar os meus números e planejar o conteúdo da próxima semana', 'Check my numbers and plan the content for next week'),
+          R('Analisar os meus números e postar o conteúdo de amanhã', 'Check my numbers and post the content for tomorrow'),
+          R('Analisar as minhas mensagens e planejar o conteúdo de amanhã', 'Check my messages and plan the content for tomorrow'),
+        ] },
+      },
+      {
+        hora: 18,
+        facil: { certa: R('Relaxar em casa', 'Relax at home'), erradas: [
+          R('Trabalhar em casa', 'Work at home'),
+          R('Relaxar na academia', 'Relax at the gym'),
+          R('Limpar a minha casa', 'Clean my house'),
+        ] },
+        dificil: { certa: R('Terminar o meu trabalho e relaxar à noite', 'Finish my work and relax in the evening'), erradas: [
+          R('Começar o meu trabalho e relaxar à noite', 'Start my work and relax in the evening'),
+          R('Terminar o meu trabalho e estudar à noite', 'Finish my work and study in the evening'),
+          R('Terminar o meu trabalho e relaxar no fim de semana', 'Finish my work and relax on the weekend'),
+        ] },
+      },
+    ],
+  },
 ];
 
-// personagens do planejamento que ainda não têm conteúdo: aparecem como "em breve"
-const EM_BREVE = [
-  { nome: 'Influencer', icone: '🤳' },
-  { nome: 'Empresário', icone: '💼' },
-  { nome: 'Jogador de futebol', icone: '⚽' },
-];
+// personagens que ainda não têm conteúdo aparecem como "em breve".
+// Por enquanto ficam de fora (Empresário e Jogador de futebol voltam aqui quando forem criados).
+const EM_BREVE = [];

@@ -1,13 +1,13 @@
 // Guarda os arquivos do jogo para funcionar offline.
 // Ao mudar qualquer arquivo do jogo, aumente a VERSAO (e o ?v= no index.html) para os aparelhos baixarem a nova.
-const VERSAO = 'myday-v6';
+const VERSAO = 'myday-v7';
 
 const ARQUIVOS = [
   './',
   './index.html',
-  './style.css?v=6',
-  './jogo.js?v=6',
-  './dados.js?v=6',
+  './style.css?v=7',
+  './jogo.js?v=7',
+  './dados.js?v=7',
   './vendor/jspdf.umd.min.js',
   './manifest.json',
   './assets/marca.png',
@@ -15,6 +15,8 @@ const ARQUIVOS = [
   './personagens/joana/capa.jpg',
   './personagens/jack/sprites.png',
   './personagens/jack/capa.jpg',
+  './personagens/emily/sprites.png',
+  './personagens/emily/capa.jpg',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',

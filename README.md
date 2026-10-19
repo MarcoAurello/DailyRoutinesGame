@@ -12,7 +12,7 @@ Funciona no celular, no tablet e no computador, e pode ser instalado como app (P
 1. **Nome** do aluno (vai para o relatório).
 2. **Modo**: português → inglês ou inglês → português.
 3. **Nível**: fácil (frases curtas) ou difícil (frases completas, erradas quase iguais à certa).
-4. **Personagem**: **Dona Joana** e **Policial Jack**; os outros 3 aparecem como "em breve".
+4. **Personagem**: **Dona Joana**, **Policial Jack** e **Influenciadora Emily** (Empresário e Jogador de futebol ainda não entraram).
 5. **Explicação** do professor (gravação ou voz do aparelho).
 6. **Jogo**: 200 segundos (o dobro do planejamento), relógio digital com ◀ ▶, indicador das 10 horas, botão **Agenda**
    (rotina no idioma de origem) e 4 alternativas no idioma de destino.

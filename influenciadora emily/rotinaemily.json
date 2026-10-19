@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "time": "09:00",
+    "question": "What does digital influencer Emily do at 09:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 09:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Record morning stories and check social media notifications.",
+        "text_pt": "Gravar stories matinais e checar as notificações das redes sociais.",
+        "is_correct": true,
+        "explanation": "Correto! Atividade típica de início de dia para uma influenciadora digital."
+      },
+      {
+        "id": "b",
+        "text_en": "He sleep on the floor at noon time.",
+        "text_pt": "Ele dormir no chão no horário do meio-dia.",
+        "is_correct": false,
+        "explanation": "Erro no verbo ('sleep' sem 's'), pronome masculino incorreto ('He' para Emily) e horário incompatível."
+      },
+      {
+        "id": "c",
+        "text_en": "Sleeping for go to the beach fastly.",
+        "text_pt": "Dormindo para ir para a praia rápido.",
+        "is_correct": false,
+        "explanation": "Uso incorreto de 'for go' (deveria ser 'to go') e a palavra 'fastly' não existe em inglês."
+      },
+      {
+        "id": "d",
+        "text_en": "Eat a heavy dinner because is very late night.",
+        "text_pt": "Comer um jantar pesado porque é muito tarde da noite.",
+        "is_correct": false,
+        "explanation": "Falta o sujeito 'it' em 'because it is' e contradição de horário (09:00 da manhã não é noite)."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "time": "10:00",
+    "question": "What does digital influencer Emily do at 10:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 10:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Workout at the gym with her personal trainer.",
+        "text_pt": "Treinar na academia com seu personal trainer.",
+        "is_correct": true,
+        "explanation": "Correto! Atividade saudável e focada na rotina diária de treino."
+      },
+      {
+        "id": "b",
+        "text_en": "Working out with eyes closed while sleeping.",
+        "text_pt": "Treinando de olhos fechados enquanto dorme.",
+        "is_correct": false,
+        "explanation": "Contradição lógica (treinar enquanto dorme)."
+      },
+      {
+        "id": "c",
+        "text_en": "He fly a helicopter with juice.",
+        "text_pt": "Ele voar um helicóptero com suco.",
+        "is_correct": false,
+        "explanation": "Pronome incorreto ('He' para Emily), falta de 's' em 'flies' e contexto ilógico."
+      },
+      {
+        "id": "d",
+        "text_en": "Bake cakes inside the station roof.",
+        "text_pt": "Assar bolos dentro do telhado da estação.",
+        "is_correct": false,
+        "explanation": "Atividade totalmente fora de contexto para a rotina da influenciadora."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "time": "11:00",
+    "question": "What does digital influencer Emily do at 11:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 11:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Create new content and film videos for her channels.",
+        "text_pt": "Criar novos conteúdos e filmar vídeos para seus canais.",
+        "is_correct": true,
+        "explanation": "Correto! Produção de conteúdo essencial para a função de influenciadora."
+      },
+      {
+        "id": "b",
+        "text_en": "Running heavy metal concerts and jump.",
+        "text_pt": "Correndo concertos de heavy metal e pular.",
+        "is_correct": false,
+        "explanation": "Mistura de verbos sem concordância e atividade fora de contexto."
+      },
+      {
+        "id": "c",
+        "text_en": "He write scripts without any pen.",
+        "text_pt": "Ele escrever roteiros sem nenhuma caneta.",
+        "is_correct": false,
+        "explanation": "Pronome masculino ('He') para Emily, falta de 's' em 'writes' e contradição lógica."
+      },
+      {
+        "id": "d",
+        "text_en": "Sleeped on desk while drive fastly.",
+        "text_pt": "Dormiu na mesa enquanto dirigir rápido.",
+        "is_correct": false,
+        "explanation": "Erro de tempo verbal ('sleeped' em vez de 'slept') e uso do advérbio inexistente 'fastly'."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "time": "12:00",
+    "question": "What does digital influencer Emily do at 12:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 12:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Eating a breakfast at midnight.",
+        "text_pt": "Comendo um café da manhã à meia-noite.",
+        "is_correct": false,
+        "explanation": "Confusão de refeição e horário (meia-noite em vez de meio-dia)."
+      },
+      {
+        "id": "b",
+        "text_en": "She have lunch at the restaurant.",
+        "text_pt": "Ela almoçar no restaurante.",
+        "is_correct": false,
+        "explanation": "Erro de concordância verbal ('She have' deveria ser 'She has')."
+      },
+      {
+        "id": "c",
+        "text_en": "Have a lunch break and share a story about her meal.",
+        "text_pt": "Fazer uma pausa para o almoço e compartilhar um story sobre a refeição.",
+        "is_correct": true,
+        "explanation": "Correto! Pausa para refeição alinhada ao hábito de compartilhar o dia a dia."
+      },
+      {
+        "id": "d",
+        "text_en": "Has lunching fast food every morning.",
+        "text_pt": "Almoçando fast food toda manhã.",
+        "is_correct": false,
+        "explanation": "Construção gramatical incorreta ('Has lunching') e conflito de horário."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "time": "13:00",
+    "question": "What does digital influencer Emily do at 13:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 13:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Attend an online business meeting with brand partners.",
+        "text_pt": "Participe de uma reunião de negócios online com marcas parceiras.",
+        "is_correct": true,
+        "explanation": "Correto! Reunião comercial coerente para negociação de parcerias."
+      },
+      {
+        "id": "b",
+        "text_en": "Sleeping for ten hours under the sun.",
+        "text_pt": "Dormindo por dez horas debaixo do sol.",
+        "is_correct": false,
+        "explanation": "Exagero ilógico e incompatível com o horário de trabalho."
+      },
+      {
+        "id": "c",
+        "text_en": "Takes a meeting while running outside.",
+        "text_pt": "Faz uma reunião enquanto corre lá fora.",
+        "is_correct": false,
+        "explanation": "Concordância incorreta do verbo com o sujeito e situação irreal."
+      },
+      {
+        "id": "d",
+        "text_en": "She don't works never in afternoon.",
+        "text_pt": "Ela não trabalha nunca à tarde.",
+        "is_correct": false,
+        "explanation": "Dupla negação incorreta ('don't' + 'never') e erro gramatical ('don't works')."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "time": "14:00",
+    "question": "What does digital influencer Emily do at 14:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 14:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Edit photos and videos for future posts.",
+        "text_pt": "Editar fotos e vídeos para publicações futuras.",
+        "is_correct": true,
+        "explanation": "Correto! Etapa técnica indispensável para pós-produção de conteúdo."
+      },
+      {
+        "id": "b",
+        "text_en": "Editing pictures with eyes closed.",
+        "text_pt": "Editando fotos com os olhos fechados.",
+        "is_correct": false,
+        "explanation": "Contradição lógica (editar imagens sem enxergar)."
+      },
+      {
+        "id": "c",
+        "text_en": "He edit a dark screen in no light.",
+        "text_pt": "Ele edita uma tela escura na sem luz.",
+        "is_correct": false,
+        "explanation": "Pronome incorreto ('He'), falta de 's' em 'edits' e frase sem sentido."
+      },
+      {
+        "id": "d",
+        "text_en": "Writes three books in one hour fastly.",
+        "text_pt": "Escreve três livros em uma hora rápido.",
+        "is_correct": false,
+        "explanation": "Atividade irrealista e uso do advérbio inexistente 'fastly'."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "time": "15:00",
+    "question": "What does digital influencer Emily do at 15:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 15:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Upload a new video to her channel.",
+        "text_pt": "Subir um novo vídeo para o seu canal.",
+        "is_correct": true,
+        "explanation": "Correto! Horário estratégico para publicação de novos vídeos."
+      },
+      {
+        "id": "b",
+        "text_en": "Calling to a stranger on toy phone.",
+        "text_pt": "Ligando para um estranho em telefone de brinquedo.",
+        "is_correct": false,
+        "explanation": "Regência incorreta ('call to') e contexto infantil sem sentido."
+      },
+      {
+        "id": "c",
+        "text_en": "He upload video with no internet.",
+        "text_pt": "Ele carrega vídeo sem internet.",
+        "is_correct": false,
+        "explanation": "Pronome incorreto ('He'), falta de 's' em 'uploads' e contradição lógica."
+      },
+      {
+        "id": "d",
+        "text_en": "Uploads all videos for a big party now.",
+        "text_pt": "Envia todos os vídeos para uma grande festa agora.",
+        "is_correct": false,
+        "explanation": "Construção e contexto incoerentes para o envio de publicações."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "time": "16:00",
+    "question": "What does digital influencer Emily do at 16:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 16:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Drink hot coffee in the shower room.",
+        "text_pt": "Beber café quente no banheiro.",
+        "is_correct": false,
+        "explanation": "Local inadequado e ilógico para um lanche ou pausa."
+      },
+      {
+        "id": "b",
+        "text_en": "Take an afternoon coffee break and answer followers' comments.",
+        "text_pt": "Fazer uma pausa para o café da tarde e responder comentários dos seguidores.",
+        "is_correct": true,
+        "explanation": "Correto! Momento de interação com o público combinado com pausa."
+      },
+      {
+        "id": "c",
+        "text_en": "He having afternoon dinner with salt.",
+        "text_pt": "Ele tendo jantar da tarde com sal.",
+        "is_correct": false,
+        "explanation": "Falta do verbo auxiliar 'is', pronome masculino incorreto e refeição fora do horário."
+      },
+      {
+        "id": "d",
+        "text_en": "Eats biscuits with hot coffee at 4 am.",
+        "text_pt": "Come biscoitos com café quente às 4 da manhã.",
+        "is_correct": false,
+        "explanation": "Erro de horário ('4 am' refere-se à madrugada, não 16h)."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "time": "17:00",
+    "question": "What does digital influencer Emily do at 17:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 17:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Run very fast in the midnight marathon.",
+        "text_pt": "Correr muito rápido na maratona da meia-noite.",
+        "is_correct": false,
+        "explanation": "Conflito direto de horário ('midnight' vs 17:00)."
+      },
+      {
+        "id": "b",
+        "text_en": "He takes a walk inside the closet.",
+        "text_pt": "Ele faz uma caminhada dentro do armário.",
+        "is_correct": false,
+        "explanation": "Pronome incorreto e local sem sentido."
+      },
+      {
+        "id": "c",
+        "text_en": "Review analytics and plan content for the next day.",
+        "text_pt": "Analisar as métricas e planejar o conteúdo do dia seguinte.",
+        "is_correct": true,
+        "explanation": "Correto! Planejamento de métricas no fim da jornada de trabalho."
+      },
+      {
+        "id": "d",
+        "text_en": "Walking gentley on the beach in storm.",
+        "text_pt": "Caminhando levemente na praia na tempestade.",
+        "is_correct": false,
+        "explanation": "Erro de grafia em 'gentley' (correto: 'gently') e situação inadequada."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "time": "18:00",
+    "question": "What does digital influencer Emily do at 18:00?",
+    "question_pt": "O que a influenciadora digital Emily faz às 18:00?",
+    "options": [
+      {
+        "id": "a",
+        "text_en": "Finish work duties and relax for the evening.",
+        "text_pt": "Finalizar as tarefas de trabalho e relaxar para a noite.",
+        "is_correct": true,
+        "explanation": "Correto! Encerramento padrão da rotina de trabalho das 09:00 às 18:00."
+      },
+      {
+        "id": "b",
+        "text_en": "Watching TV with the TV turned off.",
+        "text_pt": "Assistindo TV com a TV desligada.",
+        "is_correct": false,
+        "explanation": "Contradição lógica."
+      },
+      {
+        "id": "c",
+        "text_en": "He watch morning cartoon on radio.",
+        "text_pt": "Ele assiste desenho da manhã no rádio.",
+        "is_correct": false,
+        "explanation": "Concordância incorreta, pronome masculino e incompatibilidade de mídias."
+      },
+      {
+        "id": "d",
+        "text_en": "Finished work at 8 o'clock morning.",
+        "text_pt": "Terminou o trabalho às 8 horas da manhã.",
+        "is_correct": false,
+        "explanation": "Contradição de horário para um evento das 18:00."
+      }
+    ]
+  }
+]

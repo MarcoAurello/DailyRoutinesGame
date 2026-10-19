@@ -2,7 +2,7 @@
 
 - marca.jpg            -> assets/marca.png (fundo transparente)
 - marca.jpg            -> icons/ (ícones do app)
-- policialjack/jack.jpg -> personagens/jack/capa.jpg (recorte quadrado no personagem, menor para o celular)
+- policialjack/jack.jpg, influenciadora emily/emili.jpg -> personagens/<id>/capa.jpg (recorte quadrado no personagem, menor para o celular)
   (a capa da Dona Joana foi recortada à mão e não é gerada aqui)
 
 Uso: python ferramentas/marca.py
@@ -17,6 +17,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 # capas: imagem original, personagem e recorte (x0, y0, x1, y1)
 CAPAS = [
     ('policialjack/jack.jpg', 'jack', (330, 0, 1100, 768)),
+    ('influenciadora emily/emili.jpg', 'emily', (183, 0, 983, 800)),   # sem a legenda de baixo
 ]
 
 

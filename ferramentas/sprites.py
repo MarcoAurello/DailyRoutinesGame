@@ -5,7 +5,7 @@ bordas do painel, então partes claras do boneco contornadas de escuro (cabelo b
 apagadas. Cada boneco vira um quadro do mesmo tamanho, alinhado pelos pés.
 Enfeites pequenos (?, lâmpada, coração) grudam no boneco mais próximo.
 
-Uso: python ferramentas/sprites.py joana    (ou jack; sem nome, gera todos)
+Uso: python ferramentas/sprites.py joana    (ou jack, emily; sem nome, gera todos)
 O quadro (largura x altura) impresso no fim vai em 'proporcao' no dados.js.
 """
 import sys
@@ -34,6 +34,14 @@ PERSONAGENS = {
         'escala': {},
         'buracos': True,   # o fundo cinza também aparece entre braço e corpo: apaga esses buracos
     },
+    # linhas: 0 comemorando (8) · 1 pensando (6) · 2 triste (5). Cabeças e ícones (à direita) não são usados.
+    'emily': {
+        'origem': 'influenciadora emily/sprites emili.jpg',
+        'paineis': {'comemorando': (2, 36, 1321, 264), 'pensando': (2, 300, 1004, 524), 'triste': (2, 560, 841, 773)},
+        'fundo': ((213, 220, 226), 36),   # mais justo: a camiseta branca e o jeans claro ficam perto do cinza
+        'escala': {},
+        'buracos': True,
+    },
 }
 
 
@@ -60,15 +68,17 @@ def recortar_painel(img, caixa, fundo_cfg, buracos=False):
             if 0 <= nx < w and 0 <= ny < h and not fundo[ny][nx] and eh_fundo(nx, ny):
                 fundo[ny][nx] = True; fila.append((nx, ny))
     if buracos:
-        # bolsões fechados com a cor do fundo (entre braço e corpo, entre as pernas)
+        # bolsões fechados com a cor do fundo (entre braço e corpo, entre as pernas).
+        # Tolerância bem menor que a da borda, para não apagar roupa branca com sombra cinza.
+        quase_fundo = eh_fundo_func(px, (fundo_cfg[0], 16))
         for y in range(h):
             for x in range(w):
-                if fundo[y][x] or not eh_fundo(x, y): continue
+                if fundo[y][x] or not quase_fundo(x, y): continue
                 bolsao, fila = [(x, y)], deque([(x, y)]); fundo[y][x] = True
                 while fila:
                     cx, cy = fila.popleft()
                     for nx, ny in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
-                        if 0 <= nx < w and 0 <= ny < h and not fundo[ny][nx] and eh_fundo(nx, ny):
+                        if 0 <= nx < w and 0 <= ny < h and not fundo[ny][nx] and quase_fundo(nx, ny):
                             fundo[ny][nx] = True; fila.append((nx, ny)); bolsao.append((nx, ny))
                 if len(bolsao) < 20:   # pontinho claro do próprio desenho: devolve
                     for bx, by in bolsao: fundo[by][bx] = False
