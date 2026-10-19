@@ -264,6 +264,7 @@
   let horas = [], atual = 0, inicio = 0, inicioHora = 0, relogioTimer = null, encerrada = true, proximaTimer = null;
   let ultimoSegundo = null;
   // agenda: se o aluno fica numa hora sem abrir a agenda, o jogo lembra que as atividades estão nela
+  let ultimaPosCerta = -1;   // posição da resposta certa na última hora mostrada
   let pausaInicio = 0;   // quando o aluno pede para sair, o tempo fica parado até ele decidir
   let agendaJaAberta = false, agendaNaHora = false, lembreteTimer = null, lembretesFalados = 0;
 
@@ -277,6 +278,7 @@
       };
     });
     encerrada = false;
+    ultimaPosCerta = -1;
     agendaJaAberta = false; lembretesFalados = 0;
     inicio = Date.now();
     ultimoSegundo = null;
@@ -306,8 +308,20 @@
     atual = (i + horas.length) % horas.length;
     inicioHora = Date.now();   // trocar de hora reinicia o cronômetro de bônus daquela hora
     agendaNaHora = false;
+    if (horas[atual].estado === 'pendente') embaralharOpcoes(horas[atual]);
     desenharHora();
     agendarLembrete();
+  }
+
+  // a cada vez que a hora aparece, as alternativas mudam de lugar e a certa
+  // nunca fica na mesma posição da hora mostrada antes
+  function embaralharOpcoes(h) {
+    const certa = h.opcoes.find((o) => o.certa);
+    const opcoes = embaralhar(h.opcoes.filter((o) => !o.certa));
+    const pos = sortear([0, 1, 2, 3].filter((p) => p !== ultimaPosCerta));
+    opcoes.splice(pos, 0, certa);
+    h.opcoes = opcoes;
+    ultimaPosCerta = pos;
   }
 
   function marcarAgenda(classe) {
