@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo da Rotina da Dona Joana</title>
+  <style>
+    body { font-family: sans-serif; background: #f4f6f8; padding: 20px; }
+    .card { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .option { display: block; width: 100%; text-align: left; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+    .option:hover { background: #e0e0e0; }
+    .correct { background: #c8e6c9 !important; border-color: #2e7d32; }
+    .incorrect { background: #ffcdd2 !important; border-color: #c62828; }
+    .explanation { margin-top: 10px; padding: 10px; background: #eef7ff; border-left: 4px solid #0288d1; display: none; }
+  </style>
+</head>
+<body>
+
+  <h1>👵 Jogo da Rotina da Dona Joana</h1>
+  <div id="quiz-container"></div>
+
+  <script>
+    const questions = [
+      {
+        time: "09:00",
+        question: "What does Dona Joana do at 09:00? (O que a Dona Joana faz às 09:00?)",
+        options: [
+          { text: "Wake up and have a light breakfast.", correct: true, exp: "<b>Correto!</b> Estrutura gramatical perfeita e atividade lógica para a manhã." },
+          { text: "She wakes up and eat heavy dinner at morning.", correct: false, exp: "<b>Incorreto:</b> Falta o 's' em 'eats', usa 'at morning' em vez de 'in the morning' e 'dinner' significa jantar." },
+          { text: "Waking up for go to the gym fastly.", correct: false, exp: "<b>Incorreto:</b> O correto é 'to go' (não 'for go') e a palavra 'fastly' não existe em inglês (usa-se 'fast')." },
+          { text: "Sleep more because is very late night.", correct: false, exp: "<b>Incorreto:</b> Falta o sujeito ('because it is...') e 09:00 não é noite ('late night')." }
+        ]
+      },
+      {
+        time: "10:00",
+        question: "What does Dona Joana do at 10:00? (O que a Dona Joana faz às 10:00?)",
+        options: [
+          { text: "Watering plants on the roof under night.", correct: false, exp: "<b>Incorreto:</b> Expressão 'under night' não existe (seria 'at night') e não faz sentido regar o teto de noite às 10h." },
+          { text: "Water the plants in the garden.", correct: true, exp: "<b>Correto!</b> Frase simples, correta e perfeita para o horário." },
+          { text: "He water the garden with juice.", correct: false, exp: "<b>Incorreto:</b> 'He' é pronome masculino (Dona Joana é mulher), falta 's' em 'waters' e não se rega plantas com suco." },
+          { text: "Cut all the big trees in garden.", correct: false, exp: "<b>Incorreto:</b> Falta o artigo ('in the garden') e é uma atividade perigosa/incompatível para ela." }
+        ]
+      }
+      // Adicione os outros horários seguindo a mesma estrutura
+    ];
+
+    const container = document.getElementById("quiz-container");
+
+    questions.forEach((q, qIndex) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      
+      let html = `<h3>🕒 ${q.time} — ${q.question}</h3>`;
+      q.options.forEach((opt, oIndex) => {
+        html += `<button class="option" onclick="checkAnswer(${qIndex}, ${oIndex}, this)">${opt.text}</button>`;
+      });
+      html += `<div class="explanation" id="exp-${qIndex}"></div>`;
+      
+      card.innerHTML = html;
+      container.appendChild(card);
+    });
+
+    function checkAnswer(qIndex, oIndex, btn) {
+      const q = questions[qIndex];
+      const opt = q.options[oIndex];
+      const expDiv = document.getElementById(`exp-${qIndex}`);
+      
+      const parent = btn.parentElement;
+      const buttons = parent.querySelectorAll('.option');
+      buttons.forEach(b => b.classList.remove('correct', 'incorrect'));
+
+      if (opt.correct) {
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('incorrect');
+      }
+
+      expDiv.style.display = "block";
+      expDiv.innerHTML = opt.exp;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1f2a6b">
+  <meta name="author" content="Marco Nunes">
+  <meta name="description" content="My Day: jogo de rotina diária em inglês da English Academy.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="My Day">
+  <title>My Day — English Academy</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <!-- moldura de estrelas, relógios e balões -->
+  <div class="moldura" id="moldura" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="topo">
+      <img class="logo" src="assets/marca.png" alt="English Academy">
+      <button class="btn-icone" id="btn-som" type="button" aria-label="Som ligado">🔊</button>
+    </header>
+
+    <!-- 1. Nome -->
+    <section class="tela" id="tela-nome">
+      <h1 class="titulo">
+        <span class="cor-ouro">MY</span>
+        <span class="cor-branco">DAY</span>
+      </h1>
+      <p class="slogan">A rotina do dia em inglês · <i>daily routine in English</i></p>
+      <form class="cartao cartao-estreito" id="form-nome" autocomplete="off">
+        <label class="campo">
+          <span>Seu nome · <i>your name</i></span>
+          <input type="text" id="nome" maxlength="40" placeholder="Digite seu nome" required>
+        </label>
+        <p class="erro" id="erro-nome" role="alert"></p>
+        <button class="btn-grande" type="submit">Let's go ▶</button>
+      </form>
+      <div class="linha-botoes">
+        <button class="btn-sec btn-instalar" id="btn-instalar" type="button" hidden>📲 Instalar app</button>
+      </div>
+    </section>
+
+    <!-- 2. Modo -->
+    <section class="tela" id="tela-modo">
+      <h2 class="subtitulo">Escolha o modo</h2>
+      <p class="sub-ingles">Choose your mode</p>
+      <div class="grade-escolhas">
+        <button class="escolha" type="button" data-modo="pt-en">
+          <span class="escolha-icone"><span class="idioma">PT</span> ➜ <span class="idioma en">EN</span></span>
+          <span class="escolha-titulo">Português → Inglês</span>
+          <span class="escolha-texto">A agenda vem em português e você escolhe a frase em inglês.</span>
+        </button>
+        <button class="escolha" type="button" data-modo="en-pt">
+          <span class="escolha-icone"><span class="idioma en">EN</span> ➜ <span class="idioma">PT</span></span>
+          <span class="escolha-titulo">Inglês → Português</span>
+          <span class="escolha-texto">A agenda vem em inglês e você escolhe a frase em português.</span>
+        </button>
+      </div>
+      <button class="btn-sec" type="button" data-voltar="tela-nome">← Voltar</button>
+    </section>
+
+    <!-- 3. Nível -->
+    <section class="tela" id="tela-nivel">
+      <h2 class="subtitulo">Escolha o nível</h2>
+      <p class="sub-ingles">Choose your level</p>
+      <div class="grade-escolhas">
+        <button class="escolha" type="button" data-nivel="facil">
+          <span class="escolha-icone">⭐</span>
+          <span class="escolha-titulo">Fácil · <i>Easy</i></span>
+          <span class="escolha-texto">Frases curtas: <b>Have breakfast</b>.</span>
+        </button>
+        <button class="escolha" type="button" data-nivel="dificil">
+          <span class="escolha-icone">⭐⭐⭐</span>
+          <span class="escolha-titulo">Difícil · <i>Hard</i></span>
+          <span class="escolha-texto">Frases completas: <b>Have a light breakfast in the kitchen</b>. Leia com atenção!</span>
+        </button>
+      </div>
+      <button class="btn-sec" type="button" data-voltar="tela-modo">← Voltar</button>
+    </section>
+
+    <!-- 4. Personagem -->
+    <section class="tela" id="tela-personagem">
+      <h2 class="subtitulo">Escolha o personagem</h2>
+      <p class="sub-ingles">Choose your character</p>
+      <div class="grade-personagens" id="grade-personagens"></div>
+      <button class="btn-sec" type="button" data-voltar="tela-nivel">← Voltar</button>
+    </section>
+
+    <!-- 5. Explicação do professor -->
+    <section class="tela" id="tela-explicacao">
+      <div class="cartao cartao-explicacao">
+        <div class="capa" id="capa"></div>
+        <div class="cena">
+          <div class="sprite-area" id="sprite-explicacao"></div>
+          <div class="balao balao-esq">
+            <span class="balao-rotulo">How to play · Como jogar</span>
+            <p id="texto-explicacao"></p>
+          </div>
+        </div>
+        <div class="linha-botoes">
+          <button class="btn-sec" id="btn-ouvir-explicacao" type="button">🔊 Ouvir de novo</button>
+          <button class="btn-grande" id="btn-comecar" type="button">Start ▶</button>
+        </div>
+        <button class="btn-sec" type="button" data-voltar="tela-personagem">← Voltar</button>
+      </div>
+    </section>
+
+    <!-- 6. Jogo -->
+    <section class="tela" id="tela-jogo">
+      <div class="barra-jogo">
+        <div class="cronometro" id="cronometro" role="timer" aria-live="off">
+          <span class="cronometro-num" id="cronometro-num">100</span>
+          <span class="cronometro-barra"><b id="cronometro-barra"></b></span>
+        </div>
+        <button class="btn-agenda" id="btn-agenda" type="button">📒 Agenda</button>
+      </div>
+
+      <div class="relogio">
+        <button class="seta" id="hora-ant" type="button" aria-label="Hora anterior">◀</button>
+        <div class="visor" id="visor">09:00</div>
+        <button class="seta" id="hora-prox" type="button" aria-label="Próxima hora">▶</button>
+      </div>
+      <div class="horas" id="horas" role="tablist" aria-label="Horas do dia"></div>
+
+      <div class="jogo-grade">
+        <div class="cena cena-jogo">
+          <div class="sprite-area" id="sprite-jogo"></div>
+          <div class="balao balao-cima" id="balao-jogo"></div>
+        </div>
+        <div class="cartao cartao-pergunta">
+          <p class="enunciado" id="enunciado"></p>
+          <div class="opcoes" id="opcoes"></div>
+          <p class="situacao" id="situacao" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Fim -->
+    <section class="tela" id="tela-fim">
+      <div class="cartao cartao-fim">
+        <h2 class="subtitulo" id="fim-titulo">End of the day!</h2>
+        <div class="sprite-area" id="sprite-fim"></div>
+        <div class="placar">
+          <div><span>Pontuação</span><b id="fim-pontos">0</b></div>
+          <div><span>Acertos</span><b id="fim-acertos">0</b></div>
+          <div><span>Erros</span><b id="fim-erros">0</b></div>
+          <div><span>Tempo</span><b id="fim-tempo">0s</b></div>
+        </div>
+        <p class="fim-texto" id="fim-texto"></p>
+      </div>
+
+      <div class="cartao relatorio">
+        <h3 class="relatorio-titulo">📋 Correção · <i>Answer key</i></h3>
+        <p class="relatorio-info" id="relatorio-info"></p>
+        <div class="tabela-rolagem"><table class="tabela-correcao" id="tabela-correcao"></table></div>
+        <div class="linha-botoes">
+          <button class="btn-grande" id="btn-pdf" type="button">📄 Baixar PDF</button>
+        </div>
+      </div>
+
+      <div class="linha-botoes">
+        <button class="btn-grande" id="btn-repetir" type="button">↻ Play again</button>
+        <button class="btn-sec" id="btn-menu" type="button">Mudar modo, nível ou personagem</button>
+      </div>
+      <div class="confete" id="confete" aria-hidden="true"></div>
+    </section>
+
+    <!-- Ajuda para instalar -->
+    <section class="tela" id="tela-instalar">
+      <div class="cartao">
+        <h2 class="subtitulo">📲 Instalar o jogo</h2>
+        <ol class="passos" id="passos-instalar"></ol>
+        <button class="btn-grande" id="btn-fechar-instalar" type="button">OK</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Agenda (popup) -->
+  <div class="fundo-modal" id="modal-agenda" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="agenda-titulo">
+      <div class="modal-topo">
+        <h3 id="agenda-titulo">📒 Agenda</h3>
+        <button class="btn-fechar" id="fechar-agenda" type="button" aria-label="Fechar">✕</button>
+      </div>
+      <ol class="agenda" id="lista-agenda"></ol>
+    </div>
+  </div>
+
+  <footer class="credito">
+    <span>© <b>Marco Nunes</b> — Todos os direitos reservados</span>
+  </footer>
+
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script src="dados.js?v=1"></script>
+  <script src="jogo.js?v=1"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));
+    }
+  </script>
+</body>
+</html>
